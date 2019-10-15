@@ -27,10 +27,6 @@ class MunicipalitySimulation extends Simulation {
   val municipalityScenario = scenario("Municipalities")
     .exec(Municipality.list, Municipality.detail)
 
-  // generate an open workload injection profile
-  // with levels of 10, 15, 20, 25 and 30 arriving users per second
-  // each level lasting 30 seconds
-  // separated by linear ramps lasting 30 seconds
   setUp(
     municipalityScenario.inject(
       incrementUsersPerSec(5)
