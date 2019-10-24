@@ -4,7 +4,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
 object StreetName {
-  val feeder = csv("all-strname-ids.csv.zip").unzip.batch.random
+  val feeder = csv("all-streetname-ids.csv.zip").unzip.batch.random
 
   val list =
     exec(

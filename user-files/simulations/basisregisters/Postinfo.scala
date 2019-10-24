@@ -4,7 +4,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
 object Postinfo {
-  val feeder = csv("all-postal-codes.csv").unzip.batch.random
+  val feeder = csv("all-postal-codes.csv").batch.random
 
   val list =
     exec(
