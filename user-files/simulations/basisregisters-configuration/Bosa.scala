@@ -1,4 +1,4 @@
-package basisregisters
+package basisregisters.configuration
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
