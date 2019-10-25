@@ -9,8 +9,8 @@ class BuildingUnitSimulation extends Simulation with Configuration {
   setUp(
     weightedScenario(
       "BuildingUnits",
-      WeightedPossibility(BuildingUnit.list, 30), 
-      WeightedPossibility(BuildingUnit.detail, 70)
+      Possibility(BuildingUnit.list, 30), 
+      Possibility(BuildingUnit.detail, 70)
     )
   )
 }

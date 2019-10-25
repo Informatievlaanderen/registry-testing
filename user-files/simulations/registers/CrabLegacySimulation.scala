@@ -9,8 +9,8 @@ class CrabLegacySimulation extends Simulation with Configuration {
   setUp(
     weightedScenario(
       "CRAB_Addresses",
-      WeightedPossibility(CrabLegacy.listHouseNumbers, 30), 
-      WeightedPossibility(CrabLegacy.listSubaddresses, 70)
+      Possibility(CrabLegacy.listHouseNumbers, 30), 
+      Possibility(CrabLegacy.listSubaddresses, 70)
     )
   )
 }

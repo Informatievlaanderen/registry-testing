@@ -9,8 +9,8 @@ class ParcelSimulation extends Simulation with Configuration {
   setUp(
     weightedScenario(
       "Parcels",
-      WeightedPossibility(Parcel.list, 30), 
-      WeightedPossibility(Parcel.detail, 70)
+      Possibility(Parcel.list, 30), 
+      Possibility(Parcel.detail, 70)
     )
   )
 }

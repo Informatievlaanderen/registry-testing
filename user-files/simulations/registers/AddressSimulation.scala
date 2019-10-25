@@ -9,8 +9,8 @@ class AddressSimulation extends Simulation with Configuration {
   setUp(
     weightedScenario(
       "Addresses",
-      WeightedPossibility(Address.list, 30), 
-      WeightedPossibility(Address.detail, 70)
+      Possibility(Address.list, 30), 
+      Possibility(Address.detail, 70)
     )
   )
 }

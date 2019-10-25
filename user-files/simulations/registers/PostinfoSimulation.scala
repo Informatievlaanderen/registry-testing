@@ -9,8 +9,8 @@ class PostinfoSimulation extends Simulation with Configuration {
   setUp(
     weightedScenario(
       "Postinfos",
-      WeightedPossibility(Postinfo.list, 30), 
-      WeightedPossibility(Postinfo.detail, 70)
+      Possibility(Postinfo.list, 30), 
+      Possibility(Postinfo.detail, 70)
     )
   )
 }

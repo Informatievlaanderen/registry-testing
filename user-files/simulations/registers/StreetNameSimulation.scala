@@ -9,8 +9,8 @@ class StreetnameSimulation extends Simulation with Configuration {
   setUp(
     weightedScenario(
       "StreetNames",
-      WeightedPossibility(StreetName.list, 30), 
-      WeightedPossibility(StreetName.detail, 70)
+      Possibility(StreetName.list, 30), 
+      Possibility(StreetName.detail, 70)
     )
   )
 }

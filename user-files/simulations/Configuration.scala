@@ -24,10 +24,10 @@ trait Configuration {
     .doNotTrackHeader("1")
     .disableCaching
 
-  private val createSwitch = (chains: Seq[WeightedPossibility]) => {
+  private val createSwitch = (chains: Seq[Possibility]) => {
     
     var (totalWeight, possibilities) = chains
-      .foldLeft[(Double, List[WeightedPossibility])](0, Nil){ (result, chain) => (result._1 + chain.weight, result._2 :+ chain) }
+      .foldLeft[(Double, List[Possibility])](0, Nil){ (result, chain) => (result._1 + chain.weight, result._2 :+ chain) }
     
     val balancedPossibilities = possibilities.map(
       possibility => {
@@ -38,7 +38,7 @@ trait Configuration {
     randomSwitch(balancedPossibilities: _*)
   }
 
-  def weightedScenario(name: String, possibilities: WeightedPossibility*): PopulationBuilder = {          
+  def weightedScenario(name: String, possibilities: Possibility*): PopulationBuilder = {          
     scenario(name)
       .exec(createSwitch(possibilities))
       .inject(
@@ -52,4 +52,4 @@ trait Configuration {
   }
 }
 
-case class WeightedPossibility(chain: ChainBuilder, weight: Double)
+case class Possibility(chain: ChainBuilder, weight: Double)

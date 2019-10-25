@@ -9,8 +9,8 @@ class MunicipalitySimulation extends Simulation with Configuration {
   setUp(
     weightedScenario(
       "Municipalities",
-      WeightedPossibility(Municipality.list, 30), 
-      WeightedPossibility(Municipality.detail, 70)
+      Possibility(Municipality.list, 30), 
+      Possibility(Municipality.detail, 70)
     )
   )
 }
