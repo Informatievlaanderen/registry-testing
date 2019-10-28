@@ -18,7 +18,7 @@ object Building {
     .exec(
       http(session => "Vraag een gebouw op")
         .get("/gebouwen/${buildingId}")
-        .check(status.is(200))
+        .check(status.in(200, 404))
         .check(jsonPath("$..identificator.objectId").is("${buildingId}"))
     )
 }

@@ -18,7 +18,7 @@ object StreetName {
     .exec(
       http(session => "Vraag een straatnaam op")
         .get("/straatnamen/${straatnaamId}")
-        .check(status.is(200))
+        .check(status.in(200, 404))
         .check(jsonPath("$..identificator.objectId").is("${straatnaamId}"))
     )
 }

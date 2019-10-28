@@ -18,7 +18,7 @@ object Parcel {
     .exec(
       http(session => "Vraag een perceel op")
         .get("/percelen/${capaKey}")
-        .check(status.is(200))
+        .check(status.in(200, 404))
         .check(jsonPath("$..identificator.objectId").is("${capaKey}"))
     )
 }

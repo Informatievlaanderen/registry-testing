@@ -18,9 +18,8 @@ object Address {
     .exec(
       http(session => "Vraag een adres op")
         .get("/adressen/${addressId}")
-        .check(status.is(200))
+        .check(status.in(200, 404))
         .check(jsonPath("$..identificator.objectId").is("${addressId}"))
     )
-
     // ToDo: add filtered-list(s): https://docs.basisregisters.vlaanderen/docs/api-documentation.html#operation/ListAddresses
 }
