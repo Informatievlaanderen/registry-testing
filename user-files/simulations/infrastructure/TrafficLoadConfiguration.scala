@@ -10,7 +10,7 @@ object Load {
       250 milliseconds,
       250 milliseconds))
 
-  val Heavy = TrafficLoadConfiguration(
+  val High = TrafficLoadConfiguration(
     20,
     MaximumResponseTimes(
       500 milliseconds,

@@ -6,6 +6,7 @@ import io.gatling.core.structure.ChainBuilder
 import io.gatling.core.structure.PopulationBuilder
 
 import scala.concurrent.duration._
+import scala.math.{min, max}
 
 class RegistrySimulation(trafficLoad: TrafficLoadConfiguration) extends Simulation {
   private val loadTestApiKey = "cafebabe-1337-1337-1337-cdcdcdcdcdcd"
@@ -37,23 +38,21 @@ class RegistrySimulation(trafficLoad: TrafficLoadConfiguration) extends Simulati
   }
 
   def weightedScenario(name: String, possibilities: Possibility*): PopulationBuilder = {          
+    val numberOfUsers = atLeast1(trafficLoad.numberOfUsers)
+    val userIncrementation = atLeast1(atMost20(numberOfUsers / 5))
+    val numberOfLevels = atLeast1(numberOfUsers / userIncrementation) 
+    println("numberOfUsers: " + numberOfUsers + ", incrementNumberOfUsersPerCycle: " + userIncrementation + ", NumberOfCycles: " + numberOfLevels)
+
     scenario(name)
       .exec(createSwitch(possibilities))
       .inject(
-        // rampUsers(10)
-        //   .during(60 seconds)
-
-        incrementUsersPerSec(5)
-          .times(1)
+        incrementUsersPerSec(userIncrementation)
+          .times(numberOfLevels)
           .eachLevelLasting(10 seconds)
-          .startingFrom(5)
-          
-        // incrementUsersPerSec(5)
-        //   // .times(100)
-        //   .times(3)
-        //   .eachLevelLasting(10 seconds)
-        //   .separatedByRampsLasting(45 seconds)
-        //   .startingFrom(5)
+          .startingFrom(userIncrementation)
       ).protocols(httpProtocol)
   }
+
+  private val atLeast1 = (value: Int) => max(1, value)
+  private val atMost20 = (value: Int) => min(20, value)
 }
