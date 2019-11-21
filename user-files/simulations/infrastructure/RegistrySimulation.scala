@@ -1,4 +1,4 @@
-package simulations
+package simulations.infrastucture
 
 import io.gatling.http.Predef._
 import io.gatling.core.Predef._
@@ -7,9 +7,7 @@ import io.gatling.core.structure.PopulationBuilder
 
 import scala.concurrent.duration._
 
-//import flood._
-
-trait Configuration {
+class RegistrySimulation(trafficLoad: TrafficLoadConfiguration) extends Simulation {
   private val loadTestApiKey = "cafebabe-1337-1337-1337-cdcdcdcdcdcd"
 
   val httpProtocol = http
@@ -42,14 +40,20 @@ trait Configuration {
     scenario(name)
       .exec(createSwitch(possibilities))
       .inject(
+        // rampUsers(10)
+        //   .during(60 seconds)
+
         incrementUsersPerSec(5)
-          // .times(100)
           .times(1)
-          .eachLevelLasting(30 seconds)
-          .separatedByRampsLasting(10 seconds)
+          .eachLevelLasting(10 seconds)
           .startingFrom(5)
+          
+        // incrementUsersPerSec(5)
+        //   // .times(100)
+        //   .times(3)
+        //   .eachLevelLasting(10 seconds)
+        //   .separatedByRampsLasting(45 seconds)
+        //   .startingFrom(5)
       ).protocols(httpProtocol)
   }
 }
-
-case class Possibility(chain: ChainBuilder, weight: Double)

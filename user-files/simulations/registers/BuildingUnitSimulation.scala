@@ -3,9 +3,9 @@ package registers
 import io.gatling.core.Predef._
 
 import basisregisters.configuration._
-import simulations._
+import simulations.infrastucture._
 
-class BuildingUnitSimulation extends Simulation with Configuration {
+class BuildingUnitSimulation extends RegistrySimulation(Load.Standard) {
   setUp(
     weightedScenario(
       "BuildingUnits",

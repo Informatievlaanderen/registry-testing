@@ -4,6 +4,18 @@
 
 > Run various tests against the registries.
 
+### Load tests
+
+Execute `run.bat/run.sh` (only use .sh on linux or in wsl, shells like git-bash give errors).  
+Tests are exceuted in a docker container, the report can be found at `results/{scenarioname-timestamp}/index.html`
+
+| Criteria | Standard | High | Peak |  
+|----------|----------|------|------|
+| requests/second | 10| 20| 380
+| Maximum response time* | 250ms | 500ms | 30000ms
+
+\* Response times are currently not spilt up in different calls. Lists and searches will take longer than (cached) detail requests, so this should be adjusted accordingly.
+
 ## Prerequisites
 
 ### Git LFS

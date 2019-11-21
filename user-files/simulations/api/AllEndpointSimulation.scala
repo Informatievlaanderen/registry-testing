@@ -4,11 +4,12 @@ import io.gatling.core.Predef._
 import io.gatling.core.structure._
 
 import basisregisters.configuration._
-import simulations._
+import simulations.infrastucture._
 
-class AllEndpointSimulation extends Simulation with Configuration {
+class AllEndpointSimulation extends RegistrySimulation(Load.Standard) {
   setUp(
-    weightedScenario("MixedSimulation",
+    weightedScenario(
+      "MixedSimulation",
       Possibility(Address.list, 30), 
       Possibility(Address.detail, 70),
       Possibility(Building.list, 30), 
