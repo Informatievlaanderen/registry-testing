@@ -1,4 +1,4 @@
-package simulations.infrastucture
+package simulations.infrastructure
 
 import scala.concurrent.duration._
 

@@ -1,4 +1,4 @@
-package simulations.infrastucture
+package simulations.infrastructure
 
 import io.gatling.core.structure.ChainBuilder
 import scala.concurrent.duration._

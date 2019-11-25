@@ -3,7 +3,7 @@ package registers
 import io.gatling.core.Predef._
 
 import basisregisters.configuration._
-import simulations.infrastucture._
+import simulations.infrastructure._
 
 class MunicipalitySimulation extends RegistrySimulation(Load.Standard) {  
   setUp(
