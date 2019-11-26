@@ -4,9 +4,9 @@ import io.gatling.core.Predef._
 import io.gatling.core.structure._
 
 import basisregisters.configuration._
-import simulations.infrastucture._
+import simulations.infrastructure._
 
-class AllEndpointSimulation extends RegistrySimulation(Load.Standard) {
+class PeakTrafficLoadSimulation extends RegistrySimulation(Load.Peak) {
   setUp(
     weightedScenario(
       "MixedSimulation",

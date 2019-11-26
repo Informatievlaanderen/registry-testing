@@ -2,6 +2,7 @@ package basisregisters.configuration
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
+import simulations.infrastructure.CheckIfConditions.{hasStatus}
 
 object Address {
   val feeder = csv("all-address-ids.csv.zip").unzip.batch.random
@@ -18,8 +19,7 @@ object Address {
     .exec(
       http(session => "Vraag een adres op")
         .get("/adressen/${addressId}")
-        .check(status.in(200, 404))
-        .check(jsonPath("$..identificator.objectId").is("${addressId}"))
+        .check(status.in(200, 404, 410))
+        .check(checkIf(hasStatus(200)) { jsonPath("$..identificator.objectId").is("${addressId}") })
     )
-    // ToDo: add filtered-list(s): https://docs.basisregisters.vlaanderen/docs/api-documentation.html#operation/ListAddresses
 }
