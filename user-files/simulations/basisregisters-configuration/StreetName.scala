@@ -14,8 +14,10 @@ object StreetName {
     exec(
       http(session => "Vraag alle straatnamen op")
         .get("/straatnamen")
-        .check(status.isValidForList(streetName))
-        .check(responseTimeInMillis.isValidForList(responseTimes, streetName))
+        .check(
+          status.isValidForList(streetName),
+          responseTimeInMillis.isValidForList(responseTimes, streetName)
+        )
     )
 
   val detail = (responseTimes: MaximumResponseTimes) =>
@@ -23,8 +25,10 @@ object StreetName {
     .exec(
       http(session => "Vraag een straatnaam op")
         .get("/straatnamen/${straatnaamId}")
-        .check(status.isValidForDetail(streetName))
+        .check(
+          status.isValidForDetail(streetName),
+          responseTimeInMillis.isValidForDetail(responseTimes, streetName)
+        )
         .checkWhenStatus(200)(jsonPath("$..identificator.objectId").is("${straatnaamId}"))
-        .check(responseTimeInMillis.isValidForDetail(responseTimes, streetName))
     )
 }

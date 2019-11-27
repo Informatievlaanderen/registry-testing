@@ -14,8 +14,10 @@ object Parcel {
     exec(
       http(session => "Vraag alle percelen op")
         .get("/percelen")
-        .check(status.isValidForList(parcel))
-        .check(responseTimeInMillis.isValidForList(responseTimes, parcel))
+        .check(
+          status.isValidForList(parcel),
+          responseTimeInMillis.isValidForList(responseTimes, parcel)
+        )
     )
 
   val detail = (responseTimes: MaximumResponseTimes) =>
@@ -23,8 +25,10 @@ object Parcel {
     .exec(
       http(session => "Vraag een perceel op")
         .get("/percelen/${capaKey}")
-        .check(status.isValidForDetail(parcel))
+        .check(
+          status.isValidForDetail(parcel),
+          responseTimeInMillis.isValidForDetail(responseTimes, parcel)
+        )
         .checkWhenStatus(200)(jsonPath("$..identificator.objectId").is("${capaKey}"))
-        .check(responseTimeInMillis.isValidForDetail(responseTimes, parcel))
     )
 }

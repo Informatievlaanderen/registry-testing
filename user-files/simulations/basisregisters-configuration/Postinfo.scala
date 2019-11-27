@@ -14,8 +14,10 @@ object Postinfo {
     exec(
       http(session => "Vraag alle percelen op")
         .get("/postinfo")
-        .check(status.isValidForList(postinfo))
-        .check(responseTimeInMillis.isValidForDetail(responseTimes, postinfo))
+        .check(
+          status.isValidForList(postinfo),
+          responseTimeInMillis.isValidForDetail(responseTimes, postinfo)
+        )
     )
 
   val detail = (responseTimes: MaximumResponseTimes) =>
@@ -23,8 +25,10 @@ object Postinfo {
     .exec(
       http(session => "Vraag een perceel op")
         .get("/postinfo/${postalCode}")
-        .check(status.isValidForDetail(postinfo))
+        .check(
+          status.isValidForDetail(postinfo),
+          responseTimeInMillis.isValidForDetail(responseTimes, postinfo)
+        )
         .checkWhenStatus(200)(jsonPath("$..identificator.objectId").is("${postalCode}"))
-        .check(responseTimeInMillis.isValidForDetail(responseTimes, postinfo))
     )
 }

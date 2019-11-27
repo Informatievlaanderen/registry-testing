@@ -13,16 +13,20 @@ object CrabLegacy {
     exec(
       http(session => "Vraag alle huisnummer addressen op")
         .get("/crabhuisnummers")
-        .check(status.isValidForList(crabHouseNumber))
-        .check(responseTimeInMillis.isValidForList(responseTimes, crabHouseNumber))
+        .check(
+          status.isValidForList(crabHouseNumber),
+          responseTimeInMillis.isValidForList(responseTimes, crabHouseNumber)
+        )
     )
 
   val listSubaddresses = (responseTimes: MaximumResponseTimes) =>
     exec(
       http(session => "Vraag alle subadres addressen op")
         .get("/crabsubadressen")
-        .check(status.isValidForList(crabSubaddress))
-        .check(responseTimeInMillis.isValidForList(responseTimes, crabSubaddress))
+        .check(
+          status.isValidForList(crabSubaddress),
+          responseTimeInMillis.isValidForList(responseTimes, crabSubaddress)
+        )
     )
 
   private class CrabName(listName: String) extends RegistryName("crab") {

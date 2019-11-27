@@ -20,7 +20,9 @@ object AddressMatch {
         .queryParam("Niscode", "${IN_NIS-Gemeentecode}")
         .queryParam("Postcode", "${IN_Postcode}")
         .queryParam("Gemeentenaam", "${IN_Gemeentenaam}")
-        .check(status.isValidForFilteredList(addressmatch))
-        .check(responseTimeInMillis.isValidForFilteredList(responseTimes, addressmatch))
+        .check(
+          status.isValidForFilteredList(addressmatch),
+          responseTimeInMillis.isValidForFilteredList(responseTimes, addressmatch)
+        )
     )
 }
