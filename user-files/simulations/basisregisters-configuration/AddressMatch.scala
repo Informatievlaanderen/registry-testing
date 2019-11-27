@@ -2,11 +2,13 @@ package basisregisters.configuration
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
+import simulations.infrastructure._
+import simulations.infrastructure.RegistryRequestChecks._
 
 object AddressMatch {
   val feeder = csv("addressmatch.csv.zip").unzip.batch.random
 
-  val search =
+  val search = (responseTimes: MaximumResponseTimes) =>
     feed(feeder)
     .exec(
       http(session => "Voer een adres match uit")
@@ -17,16 +19,6 @@ object AddressMatch {
         .queryParam("Postcode", "${IN_Postcode}")
         .queryParam("Gemeentenaam", "${IN_Gemeentenaam}")
         .check(status is 200)
+        .check(responseTimeInMillis.doesNotExceed(responseTimes.filteredList, "addressmatch"))
     )
 }
-
-// api/v{version}/adresmatch?Gemeentenaam={Gemeentenaam}&Niscode={Niscode}&Postcode={Postcode}&KadStraatcode={KadStraatcode}&RrStraatcode={RrStraatcode}&Straatnaam={Straatnaam}&Huisnummer={Huisnummer}&Index={Index}&Busnummer={Busnummer}
-
-/*
-KadStraatcode
-Straatnaam
-Huisnummer
-Niscode
-Postcode
-Gemeentenaam
-*/

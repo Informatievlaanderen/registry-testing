@@ -27,7 +27,7 @@ object Load {
 
 case class TrafficLoadConfiguration(
   numberOfUsers: Int,
-  defaultMaximumResponseTimes: MaximumResponseTimes)
+  responseTime: MaximumResponseTimes)
 
 case class MaximumResponseTimes(
   detail: FiniteDuration,

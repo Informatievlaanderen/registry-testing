@@ -9,8 +9,8 @@ class CrabLegacySimulation extends RegistrySimulation(Load.Standard) {
   setUp(
     weightedScenario(
       "CRAB_Addresses",
-      Possibility(CrabLegacy.listHouseNumbers, 30), 
-      Possibility(CrabLegacy.listSubaddresses, 70)
+      Possibility(CrabLegacy.listHouseNumbers(trafficLoad.responseTime), 30),
+      Possibility(CrabLegacy.listSubaddresses(trafficLoad.responseTime), 70)
     )
   )
 }

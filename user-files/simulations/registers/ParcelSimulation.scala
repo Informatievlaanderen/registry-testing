@@ -9,8 +9,8 @@ class ParcelSimulation extends RegistrySimulation(Load.Standard) {
   setUp(
     weightedScenario(
       "Parcels",
-      Possibility(Parcel.list, 30), 
-      Possibility(Parcel.detail, 70)
+      Possibility(Parcel.list(trafficLoad.responseTime), 30),
+      Possibility(Parcel.detail(trafficLoad.responseTime), 70)
     )
   )
 }

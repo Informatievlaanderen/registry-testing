@@ -8,7 +8,7 @@ import io.gatling.core.structure.PopulationBuilder
 import scala.concurrent.duration._
 import scala.math.{min, max}
 
-class RegistrySimulation(trafficLoad: TrafficLoadConfiguration) extends Simulation {
+class RegistrySimulation(val trafficLoad: TrafficLoadConfiguration) extends Simulation {
   private val loadTestApiKey = "cafebabe-1337-1337-1337-cdcdcdcdcdcd"
 
   val httpProtocol = http

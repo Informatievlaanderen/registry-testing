@@ -9,8 +9,8 @@ class StreetnameSimulation extends RegistrySimulation(Load.Standard) {
   setUp(
     weightedScenario(
       "StreetNames",
-      Possibility(StreetName.list, 30), 
-      Possibility(StreetName.detail, 70)
+      Possibility(StreetName.list(trafficLoad.responseTime), 30),
+      Possibility(StreetName.detail(trafficLoad.responseTime), 70)
     )
   )
 }

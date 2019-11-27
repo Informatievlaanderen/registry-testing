@@ -9,8 +9,8 @@ class AddressSimulation extends RegistrySimulation(Load.Standard) {
   setUp(
     weightedScenario(
       "Addresses",
-      Possibility(Address.list, 30), 
-      Possibility(Address.detail, 70)
+      Possibility(Address.list(trafficLoad.responseTime), 30),
+      Possibility(Address.detail(trafficLoad.responseTime), 70)
     )
   )
 }

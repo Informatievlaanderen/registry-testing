@@ -9,8 +9,8 @@ class PostinfoSimulation extends RegistrySimulation(Load.Standard) {
   setUp(
     weightedScenario(
       "Postinfos",
-      Possibility(Postinfo.list, 30), 
-      Possibility(Postinfo.detail, 70)
+      Possibility(Postinfo.list(trafficLoad.responseTime), 30),
+      Possibility(Postinfo.detail(trafficLoad.responseTime), 70)
     )
   )
 }

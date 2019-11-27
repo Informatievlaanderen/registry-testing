@@ -9,8 +9,8 @@ class BuildingSimulation extends RegistrySimulation(Load.Standard) {
   setUp(
     weightedScenario(
       "Buildings",
-      Possibility(Building.list, 30),
-      Possibility(Building.detail, 70)
+      Possibility(Building.list(trafficLoad.responseTime), 30),
+      Possibility(Building.detail(trafficLoad.responseTime), 70)
     )
   )
 }

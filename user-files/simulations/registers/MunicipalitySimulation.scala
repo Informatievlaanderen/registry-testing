@@ -9,8 +9,8 @@ class MunicipalitySimulation extends RegistrySimulation(Load.Standard) {
   setUp(
     weightedScenario(
       "Municipalities",
-      Possibility(Municipality.list, 30), 
-      Possibility(Municipality.detail, 70)
+      Possibility(Municipality.list(trafficLoad.responseTime), 30),
+      Possibility(Municipality.detail(trafficLoad.responseTime), 70)
     )
   )
 }
