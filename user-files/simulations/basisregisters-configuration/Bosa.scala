@@ -12,7 +12,7 @@ object Bosa {
   //   .exec(
   //     http(session => "Zoek een adres op")
   //       .post("/bosa/adressen") // add post-body
-  //       .check(status.is(200))
+  //       .check(status.isValidForList(todo))
   //       .check(jsonPath("$..identificator.objectId").is("${addressId}"))
   //   )
 
@@ -22,7 +22,7 @@ object Bosa {
   //   .exec(
   //     http(session => "Zoek een adres voorstelling op")
   //       .post("/bosa/adresvoorstellingen") // add post-body
-  //       .check(status.is(200))
+  //       .check(status.isValidForList(todo))
   //       .check(jsonPath("$..identificator.objectId").is("${addressId}"))
   //   )
 
@@ -33,7 +33,7 @@ object Bosa {
   //   .exec(
   //     http(session => "Zoek een gemeente op")
   //       .post("/bosa/gemeenten") // add post-body
-  //       .check(status.is(200))
+  //       .check(status.isValidForList(todo))
   //       .check(jsonPath("$..identificator.objectId").is("${addressId}"))
   //   )
 }

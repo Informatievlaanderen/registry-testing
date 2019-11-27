@@ -7,7 +7,7 @@ import simulations.infrastructure.RegistryRequestChecks._
 import simulations.infrastructure.CheckIfConditions.{hasStatus}
 
 object Address {
-  private val address = new RegistryName("address")
+  private val address = RegistryName("address")
 
   val feeder = csv("all-address-ids.csv.zip").unzip.batch.random
 
@@ -15,7 +15,7 @@ object Address {
     exec(
       http(session => "Vraag alle adressen op")
         .get("/adressen")
-        .check(status.is(200))
+        .check(status.isValidForList(address))
         .check(responseTimeInMillis.isValidForList(responseTimes, address))
     )
 
@@ -24,7 +24,7 @@ object Address {
     .exec(
       http(session => "Vraag een adres op")
         .get("/adressen/${addressId}")
-        .check(status.in(200, 404, 410))
+        .check(status.isValidForDetail(address))
         .check(checkIf(hasStatus(200)) { jsonPath("$..identificator.objectId").is("${addressId}") })
         .check(responseTimeInMillis.isValidForDetail(responseTimes, address))
     )

@@ -15,7 +15,7 @@ object Parcel {
     exec(
       http(session => "Vraag alle percelen op")
         .get("/percelen")
-        .check(status.is(200))
+        .check(status.isValidForList(parcel))
         .check(responseTimeInMillis.isValidForList(responseTimes, parcel))
     )
 
@@ -24,7 +24,7 @@ object Parcel {
     .exec(
       http(session => "Vraag een perceel op")
         .get("/percelen/${capaKey}")
-        .check(status.in(200, 404, 410))
+        .check(status.isValidForDetail(parcel))
         .check(checkIf(hasStatus(200)) { jsonPath("$..identificator.objectId").is("${capaKey}") })
         .check(responseTimeInMillis.isValidForDetail(responseTimes, parcel))
     )

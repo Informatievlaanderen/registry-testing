@@ -7,7 +7,7 @@ import simulations.infrastructure.RegistryRequestChecks._
 import simulations.infrastructure.CheckIfConditions.{hasStatus}
 
 object StreetName {
-  private val streetname = new RegistryName("streetname")
+  private val streetName = new RegistryName("streetname")
 
   val feeder = csv("all-streetname-ids.csv.zip").unzip.batch.random
 
@@ -15,8 +15,8 @@ object StreetName {
     exec(
       http(session => "Vraag alle straatnamen op")
         .get("/straatnamen")
-        .check(status.is(200))
-        .check(responseTimeInMillis.isValidForList(responseTimes, streetname))
+        .check(status.isValidForList(streetName))
+        .check(responseTimeInMillis.isValidForList(responseTimes, streetName))
     )
 
   val detail = (responseTimes: MaximumResponseTimes) =>
@@ -24,8 +24,8 @@ object StreetName {
     .exec(
       http(session => "Vraag een straatnaam op")
         .get("/straatnamen/${straatnaamId}")
-        .check(status.in(200, 404, 410))
+        .check(status.isValidForDetail(streetName))
         .check(checkIf(hasStatus(200)) { jsonPath("$..identificator.objectId").is("${straatnaamId}") })
-        .check(responseTimeInMillis.isValidForDetail(responseTimes, streetname))
+        .check(responseTimeInMillis.isValidForDetail(responseTimes, streetName))
     )
 }

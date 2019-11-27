@@ -15,7 +15,7 @@ object Municipality {
     exec(
       http(session => "Vraag alle gemeenten op")
         .get("/gemeenten")
-        .check(status.is(200))
+        .check(status.isValidForList(municipality))
         .check(responseTimeInMillis.isValidForDetail(responseTimes, municipality))
     )
     
@@ -24,7 +24,7 @@ object Municipality {
     .exec(
       http(session => "Vraag een gemeente op")
         .get("/gemeenten/${nisCode}")
-        .check(status.in(200, 404, 410))
+        .check(status.isValidForDetail(municipality))
         .check(checkIf(hasStatus(200)) { jsonPath("$..identificator.objectId").is("${nisCode}") })
         .check(responseTimeInMillis.isValidForDetail(responseTimes, municipality))
     )

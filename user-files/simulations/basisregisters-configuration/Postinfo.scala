@@ -15,7 +15,7 @@ object Postinfo {
     exec(
       http(session => "Vraag alle percelen op")
         .get("/postinfo")
-        .check(status.is(200))
+        .check(status.isValidForList(postinfo))
         .check(responseTimeInMillis.isValidForDetail(responseTimes, postinfo))
     )
 
@@ -24,7 +24,7 @@ object Postinfo {
     .exec(
       http(session => "Vraag een perceel op")
         .get("/postinfo/${postalCode}")
-        .check(status.in(200, 404, 410))
+        .check(status.isValidForDetail(postinfo))
         .check(checkIf(hasStatus(200)) { jsonPath("$..identificator.objectId").is("${postalCode}") })
         .check(responseTimeInMillis.isValidForDetail(responseTimes, postinfo))
     )

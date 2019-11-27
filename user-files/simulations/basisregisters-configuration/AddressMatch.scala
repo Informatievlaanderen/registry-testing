@@ -6,6 +6,8 @@ import simulations.infrastructure._
 import simulations.infrastructure.RegistryRequestChecks._
 
 object AddressMatch {
+  private val addressmatch = RegistryName("addressmatch")
+
   val feeder = csv("addressmatch.csv.zip").unzip.batch.random
 
   val search = (responseTimes: MaximumResponseTimes) =>
@@ -18,7 +20,7 @@ object AddressMatch {
         .queryParam("Niscode", "${IN_NIS-Gemeentecode}")
         .queryParam("Postcode", "${IN_Postcode}")
         .queryParam("Gemeentenaam", "${IN_Gemeentenaam}")
-        .check(status is 200)
-        .check(responseTimeInMillis.doesNotExceed(responseTimes.filteredList, "addressmatch"))
+        .check(status.isValidForFilteredList(addressmatch))
+        .check(responseTimeInMillis.isValidForFilteredList(responseTimes, addressmatch))
     )
 }
