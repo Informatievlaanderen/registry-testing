@@ -4,7 +4,6 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import simulations.infrastructure._
 import simulations.infrastructure.RegistryRequestChecks._
-import simulations.infrastructure.CheckIfConditions.{hasStatus}
 
 object Municipality {
   private val municipality = new RegistryName("municipality")
@@ -25,7 +24,7 @@ object Municipality {
       http(session => "Vraag een gemeente op")
         .get("/gemeenten/${nisCode}")
         .check(status.isValidForDetail(municipality))
-        .check(checkIf(hasStatus(200)) { jsonPath("$..identificator.objectId").is("${nisCode}") })
+        .checkWhenStatus(200)(jsonPath("$..identificator.objectId").is("${nisCode}"))
         .check(responseTimeInMillis.isValidForDetail(responseTimes, municipality))
     )
 }
