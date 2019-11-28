@@ -1,16 +1,21 @@
-package basisregisters.configuration
+package registries
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
-import simulations.infrastructure._
-import simulations.infrastructure.RegistryRequestChecks._
+import infrastructure._
+import infrastructure.RegistryRequestChecks._
 
 object Parcel {
   private val parcel = new RegistryName("parcel")
 
   val feeder = csv("all-parcel-ids.csv.zip").unzip.batch.random
 
-  val list = (responseTimes: MaximumResponseTimes) =>
+  val possibleCalls = List(
+      Possibility(list, 30),
+      Possibility(detail, 70)
+    )
+
+  private def list(responseTimes: MaximumResponseTimes) = {
     exec(
       http(session => "Vraag alle percelen op")
         .get("/percelen")
@@ -19,8 +24,9 @@ object Parcel {
           responseTimeInMillis.isValidForList(responseTimes, parcel)
         )
     )
+  }
 
-  val detail = (responseTimes: MaximumResponseTimes) =>
+  private def detail(responseTimes: MaximumResponseTimes) = {
     feed(feeder)
     .exec(
       http(session => "Vraag een perceel op")
@@ -31,4 +37,5 @@ object Parcel {
         )
         .checkWhenStatus(200)(jsonPath("$..identificator.objectId").is("${capaKey}"))
     )
+  }
 }

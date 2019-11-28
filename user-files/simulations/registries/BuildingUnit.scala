@@ -1,16 +1,21 @@
-package basisregisters.configuration
+package registries
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
-import simulations.infrastructure._
-import simulations.infrastructure.RegistryRequestChecks._
+import infrastructure._
+import infrastructure.RegistryRequestChecks._
 
 object BuildingUnit {
   private val buildingUnit = RegistryName("buildingUnit")
-
+  
   val feeder = csv("all-buildingunit-ids.csv.zip").unzip.batch.random
+  
+  val possibleCalls = List(
+      Possibility(list, 30),
+      Possibility(detail, 70)
+    )
 
-  val list = (responseTimes: MaximumResponseTimes) =>
+  private def list(responseTimes: MaximumResponseTimes) = {
     exec(
       http(session => "Vraag alle gebouweenheiden op")
         .get("/gebouweenheden")
@@ -19,8 +24,9 @@ object BuildingUnit {
           responseTimeInMillis.isValidForList(responseTimes, buildingUnit)
         )
     )
+  }
 
-  val detail = (responseTimes: MaximumResponseTimes) =>
+  private def detail(responseTimes: MaximumResponseTimes) = {
     feed(feeder)
     .exec(
       http(session => "Vraag een gebouweenheid op")
@@ -31,4 +37,5 @@ object BuildingUnit {
         )
         .checkWhenStatus(200)(jsonPath("$..identificator.objectId").is("${buildingUnitId}"))
     )
+  }
 }

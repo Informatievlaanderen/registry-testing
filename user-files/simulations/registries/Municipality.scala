@@ -1,16 +1,21 @@
-package basisregisters.configuration
+package registries
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
-import simulations.infrastructure._
-import simulations.infrastructure.RegistryRequestChecks._
+import infrastructure._
+import infrastructure.RegistryRequestChecks._
 
 object Municipality {
   private val municipality = new RegistryName("municipality")
   
   val feeder = csv("all-municipality-niscodes.csv").batch.random
+  
+  val possibleCalls = List(
+      Possibility(list, 30),
+      Possibility(detail, 70)
+    )
 
-  val list = (responseTimes: MaximumResponseTimes) =>
+  private def list(responseTimes: MaximumResponseTimes) = {
     exec(
       http(session => "Vraag alle gemeenten op")
         .get("/gemeenten")
@@ -19,8 +24,9 @@ object Municipality {
           responseTimeInMillis.isValidForDetail(responseTimes, municipality)
         )
     )
+  }
     
-  val detail = (responseTimes: MaximumResponseTimes) =>
+  private def detail(responseTimes: MaximumResponseTimes) = {
     feed(feeder)
     .exec(
       http(session => "Vraag een gemeente op")
@@ -31,4 +37,5 @@ object Municipality {
         )
         .checkWhenStatus(200)(jsonPath("$..identificator.objectId").is("${nisCode}"))
     )
+  }
 }

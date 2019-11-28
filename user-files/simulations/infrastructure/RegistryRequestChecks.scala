@@ -1,4 +1,4 @@
-package simulations.infrastructure
+package infrastructure
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
@@ -42,14 +42,14 @@ object RegistryRequestChecks {
       doesNotExceed(responseTimes.detail, registy.detail)
   }
 
-  private val listStatus = 200
-  private val detailStatuses = List(200, 404, 410)
+  private val listStatusCode = 200
+  private val detailStatusCodes = List(200, 404, 410)
 
   implicit class RegistryResponseStatusChecks(val status: FindCheckBuilder[HttpStatusCheckType, Response, Int]) extends AnyVal {
     private def isValidForListWithPath(listPath: String) =  
       status
-        .is(listStatus)
-        .name(s"[$listPath] expected status $listStatus")  
+        .is(listStatusCode)
+        .name(s"[$listPath] expected status $listStatusCode")  
 
     def isValidForList(registy: RegistryName) =   
       isValidForListWithPath(registy.list)
@@ -59,7 +59,7 @@ object RegistryRequestChecks {
 
     def isValidForDetail(registy: RegistryName) = 
       status
-        .in(detailStatuses)
-        .name(s"[${registy.detail}] expected status from (${detailStatuses.mkString(", ")})")
+        .in(detailStatusCodes)
+        .name(s"[${registy.detail}] expected status from (${detailStatusCodes.mkString(", ")})")
   }
 }

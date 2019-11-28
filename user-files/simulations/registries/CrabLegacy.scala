@@ -1,15 +1,20 @@
-package basisregisters.configuration
+package registries
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
-import simulations.infrastructure._
-import simulations.infrastructure.RegistryRequestChecks._
+import infrastructure._
+import infrastructure.RegistryRequestChecks._
 
 object CrabLegacy {
   private val crabHouseNumber = new CrabName("housenumber")
   private val crabSubaddress = new CrabName("subaddress")
-
-  val listHouseNumbers = (responseTimes: MaximumResponseTimes) =>
+  
+  val possibleCalls = List(
+      Possibility(listHouseNumbers, 50),
+      Possibility(listSubaddresses, 50)
+    )
+    
+  private def listHouseNumbers(responseTimes: MaximumResponseTimes) = {
     exec(
       http(session => "Vraag alle huisnummer addressen op")
         .get("/crabhuisnummers")
@@ -18,8 +23,9 @@ object CrabLegacy {
           responseTimeInMillis.isValidForList(responseTimes, crabHouseNumber)
         )
     )
+  }
 
-  val listSubaddresses = (responseTimes: MaximumResponseTimes) =>
+  private def listSubaddresses(responseTimes: MaximumResponseTimes) = {
     exec(
       http(session => "Vraag alle subadres addressen op")
         .get("/crabsubadressen")
@@ -28,6 +34,7 @@ object CrabLegacy {
           responseTimeInMillis.isValidForList(responseTimes, crabSubaddress)
         )
     )
+  }
 
   private class CrabName(listName: String) extends RegistryName("crab") {
     override val list = s"$name/$listName"

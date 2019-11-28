@@ -1,4 +1,4 @@
-package simulations.infrastructure
+package infrastructure
 
 import scala.concurrent.duration._
 
@@ -27,7 +27,7 @@ object Load {
 
 case class TrafficLoadConfiguration(
   numberOfUsers: Int,
-  responseTime: MaximumResponseTimes)
+  responseTimes: MaximumResponseTimes)
 
 case class MaximumResponseTimes(
   detail: FiniteDuration,

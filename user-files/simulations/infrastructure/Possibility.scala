@@ -1,6 +1,8 @@
-package simulations.infrastructure
+package infrastructure
 
 import io.gatling.core.structure.ChainBuilder
 import scala.concurrent.duration._
 
-case class Possibility(chain: ChainBuilder, weight: Double)
+case class Possibility(
+    createChain: MaximumResponseTimes => ChainBuilder, 
+    weight: Double)

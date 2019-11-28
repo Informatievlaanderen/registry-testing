@@ -1,16 +1,20 @@
-package basisregisters.configuration
+package registries
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
-import simulations.infrastructure._
-import simulations.infrastructure.RegistryRequestChecks._
+import infrastructure._
+import infrastructure.RegistryRequestChecks._
 
 object AddressMatch {
   private val addressmatch = RegistryName("addressmatch")
 
   val feeder = csv("addressmatch.csv.zip").unzip.batch.random
 
-  val search = (responseTimes: MaximumResponseTimes) =>
+  val possibleCalls = List(
+      Possibility(search, 100)
+    )
+
+  private def search(responseTimes: MaximumResponseTimes) = {
     feed(feeder)
     .exec(
       http(session => "Voer een adres match uit")
@@ -25,4 +29,5 @@ object AddressMatch {
           responseTimeInMillis.isValidForFilteredList(responseTimes, addressmatch)
         )
     )
+  }
 }

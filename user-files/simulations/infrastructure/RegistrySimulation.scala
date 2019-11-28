@@ -1,4 +1,4 @@
-package simulations.infrastructure
+package infrastructure
 
 import io.gatling.http.Predef._
 import io.gatling.core.Predef._
@@ -8,7 +8,8 @@ import io.gatling.core.structure.PopulationBuilder
 import scala.concurrent.duration._
 import scala.math.{min, max}
 
-class RegistrySimulation(val trafficLoad: TrafficLoadConfiguration) extends Simulation {
+abstract class RegistrySimulation extends Simulation {
+  
   private val loadTestApiKey = "cafebabe-1337-1337-1337-cdcdcdcdcdcd"
 
   val httpProtocol = http
@@ -23,7 +24,29 @@ class RegistrySimulation(val trafficLoad: TrafficLoadConfiguration) extends Simu
     .doNotTrackHeader("1")
     .disableCaching
 
-  private val createSwitch = (chains: Seq[Possibility]) => {
+  def setUp(
+    name: String, 
+    load: TrafficLoadConfiguration, 
+    possibilities: List[Possibility]): SetUp = {          
+    
+    val numberOfUsers = atLeast1(load.numberOfUsers)
+    val userIncrementation = atLeast1(atMost20(numberOfUsers / 5))
+    val numberOfLevels = atLeast1(numberOfUsers / userIncrementation) 
+    println("numberOfUsers: " + numberOfUsers + ", incrementNumberOfUsersPerCycle: " + userIncrementation + ", NumberOfCycles: " + numberOfLevels)
+
+    setUp(
+      scenario(name)
+        .exec(createSwitch(possibilities, load))
+        .inject(
+          incrementUsersPerSec(userIncrementation)
+            .times(numberOfLevels)
+            .eachLevelLasting(10 seconds)
+            .startingFrom(userIncrementation)
+        ).protocols(httpProtocol)
+    )
+  }  
+
+  private def createSwitch(chains: List[Possibility], load: TrafficLoadConfiguration) = {
     
     var (totalWeight, possibilities) = chains
       .foldLeft[(Double, List[Possibility])](0, Nil){ (result, chain) => (result._1 + chain.weight, result._2 :+ chain) }
@@ -31,28 +54,12 @@ class RegistrySimulation(val trafficLoad: TrafficLoadConfiguration) extends Simu
     val balancedPossibilities = possibilities.map(
       possibility => {
         val weight = if (totalWeight == 0) possibility.weight else possibility.weight / totalWeight * 100  
-        (weight, possibility.chain)
+        (weight, possibility.createChain(load.responseTimes))
       })
 
     randomSwitch(balancedPossibilities: _*)
   }
 
-  def weightedScenario(name: String, possibilities: Possibility*): PopulationBuilder = {          
-    val numberOfUsers = atLeast1(trafficLoad.numberOfUsers)
-    val userIncrementation = atLeast1(atMost20(numberOfUsers / 5))
-    val numberOfLevels = atLeast1(numberOfUsers / userIncrementation) 
-    println("numberOfUsers: " + numberOfUsers + ", incrementNumberOfUsersPerCycle: " + userIncrementation + ", NumberOfCycles: " + numberOfLevels)
-
-    scenario(name)
-      .exec(createSwitch(possibilities))
-      .inject(
-        incrementUsersPerSec(userIncrementation)
-          .times(numberOfLevels)
-          .eachLevelLasting(10 seconds)
-          .startingFrom(userIncrementation)
-      ).protocols(httpProtocol)
-  }
-
-  private val atLeast1 = (value: Int) => max(1, value)
-  private val atMost20 = (value: Int) => min(20, value)
+  private def atLeast1(value: Int) = max(1, value)
+  private def atMost20(value: Int) = min(20, value)
 }
