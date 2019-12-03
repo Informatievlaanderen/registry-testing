@@ -27,15 +27,15 @@ abstract class ApiRegistrySimulation(name: String, load: TrafficLoadConfiguratio
     name,
     load,
     recalculateWeights(
-      RegisterySetup(Address.possibleCalls, 10),
-      // todo: add addressmatch
-      RegisterySetup(Building.possibleCalls, 10),
-      RegisterySetup(BuildingUnit.possibleCalls, 10),
-      RegisterySetup(CrabLegacy.possibleCalls, 10),
-      RegisterySetup(Municipality.possibleCalls, 10),
+      RegisterySetup(Address.possibleCalls, 25),
+      // todo: RegisterySetup(Addressmatch.possibleCalls, 8),
+      RegisterySetup(Building.possibleCalls, 15),
+      RegisterySetup(BuildingUnit.possibleCalls, 20),
+      RegisterySetup(CrabLegacy.possibleCalls, 2.5),
+      RegisterySetup(Municipality.possibleCalls, 1),
       RegisterySetup(Parcel.possibleCalls, 10),
-      RegisterySetup(Postinfo.possibleCalls, 10),
-      RegisterySetup(StreetName.possibleCalls, 10),
+      RegisterySetup(Postinfo.possibleCalls, 1),
+      RegisterySetup(StreetName.possibleCalls, 5),
     )
   )
 
