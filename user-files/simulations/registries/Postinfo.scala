@@ -8,7 +8,7 @@ import infrastructure.RegistryRequestChecks._
 object Postinfo {
   private val postinfo = new RegistryName("postinfo")
   
-  val feeder = csv("all-postal-codes.csv").batch.random
+  val feeder = csv("all-postal-codes.csv.zip").unzip.batch.random
   
   val possibleCalls = List(
       Possibility(list, 30),

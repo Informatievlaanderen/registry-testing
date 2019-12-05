@@ -8,7 +8,7 @@ import infrastructure.RegistryRequestChecks._
 object Municipality {
   private val municipality = new RegistryName("municipality")
   
-  val feeder = csv("all-municipality-niscodes.csv").batch.random
+  val feeder = csv("all-municipality-niscodes.csv.zip").unzip.batch.random
   
   val possibleCalls = List(
       Possibility(list, 30),
