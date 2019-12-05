@@ -19,7 +19,7 @@ object Postinfo {
         .get("/postinfo")
         .check(
           status.isValidForList(postinfo),
-          responseTimeInMillis.isValidForDetail(responseTimes, postinfo)
+          responseTimeInMillis.isValidForList(responseTimes, postinfo)
         )
     )
   }
