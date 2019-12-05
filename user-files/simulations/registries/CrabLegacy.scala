@@ -8,9 +8,7 @@ import infrastructure.RegistryRequestChecks._
 object CrabLegacy {
   private val crabHouseNumber = new CrabName("housenumbers")
   private val crabSubaddress = new CrabName("subaddresses")
-  private val housenumberFeeder = csv("all-crab-housenumber-ids.csv.zip").unzip.batch.random
-  private val subaddressFeeder = csv("all-crab-subaddress-ids.csv.zip").unzip.batch.random
-  
+
   val possibleCalls = List(
       Possibility(listHouseNumbers, 10),
       Possibility(filteredListHouseNumbers, 40),
@@ -30,7 +28,7 @@ object CrabLegacy {
   }
 
   private def filteredListHouseNumbers(responseTimes: MaximumResponseTimes) = {
-    feed(housenumberFeeder)
+    feed(Feeders.Crab.housenumberIds)
     .exec(
       http(session => "Vraag alle subadres addressen op")
         .get("/crabhuisnummers")
@@ -54,7 +52,7 @@ object CrabLegacy {
   }
 
   private def filteredListSubaddresses(responseTimes: MaximumResponseTimes) = {
-    feed(subaddressFeeder)
+    feed(Feeders.Crab.subaddressIds)
     .exec(
       http(session => "Vraag alle subadres addressen op")
         .get("/crabsubadressen")

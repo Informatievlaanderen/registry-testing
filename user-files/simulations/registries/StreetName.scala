@@ -8,8 +8,6 @@ import infrastructure.RegistryRequestChecks._
 object StreetName {
   private val streetName = new RegistryName("streetname")
   
-  val feeder = csv("all-streetname-ids.csv.zip").unzip.batch.random
-  
   val possibleCalls = List(
       Possibility(list, 30),
       Possibility(detail, 70)
@@ -27,7 +25,7 @@ object StreetName {
   }
 
   private def detail(responseTimes: MaximumResponseTimes) = {
-    feed(feeder)
+    feed(Feeders.streenameIds)
     .exec(
       http(session => "Vraag een straatnaam op")
         .get("/straatnamen/${straatnaamId}")

@@ -8,8 +8,6 @@ import infrastructure.RegistryRequestChecks._
 object Postinfo {
   private val postinfo = new RegistryName("postinfo")
   
-  val feeder = csv("all-postal-codes.csv.zip").unzip.batch.random
-  
   val possibleCalls = List(
       Possibility(list, 30),
       Possibility(detail, 70)
@@ -27,7 +25,7 @@ object Postinfo {
   }
 
   private def detail(responseTimes: MaximumResponseTimes) = {
-    feed(feeder)
+    feed(Feeders.postalCodes)
     .exec(
       http(session => "Vraag een perceel op")
         .get("/postinfo/${postalCode}")

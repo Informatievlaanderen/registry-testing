@@ -8,8 +8,6 @@ import infrastructure.RegistryRequestChecks._
 object Address {
   private val address = RegistryName("address")
   
-  val feeder = csv("all-address-ids.csv.zip").unzip.batch.random
-
   val possibleCalls = List(
       Possibility(list, 30),
       Possibility(detail, 70)
@@ -27,7 +25,7 @@ object Address {
   }
 
   private def detail(responseTimes: MaximumResponseTimes) = {
-    feed(feeder)
+    feed(Feeders.addressIds)
     .exec(
       http(session => "Vraag een adres op")
         .get("/adressen/${addressId}")

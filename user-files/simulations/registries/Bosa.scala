@@ -4,7 +4,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
 object Bosa {
-  // val feeder = csv("all-address-ids.csv.zip").unzip.batch.random
+  // var feeder = Feeders.addressIds
 
   // https://docs.basisregisters.vlaanderen/docs/api-documentation.html#operation/SearchBestAddAddress
   // val findAddress =

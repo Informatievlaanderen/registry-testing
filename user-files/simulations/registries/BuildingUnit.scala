@@ -7,9 +7,7 @@ import infrastructure.RegistryRequestChecks._
 
 object BuildingUnit {
   private val buildingUnit = RegistryName("buildingUnit")
-  
-  val feeder = csv("all-buildingunit-ids.csv.zip").unzip.batch.random
-  
+    
   val possibleCalls = List(
       Possibility(list, 30),
       Possibility(detail, 70)
@@ -27,7 +25,7 @@ object BuildingUnit {
   }
 
   private def detail(responseTimes: MaximumResponseTimes) = {
-    feed(feeder)
+    feed(Feeders.buildingUnitIds)
     .exec(
       http(session => "Vraag een gebouweenheid op")
         .get("/gebouweenheden/${buildingUnitId}")

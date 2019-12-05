@@ -8,8 +8,6 @@ import infrastructure.RegistryRequestChecks._
 object Parcel {
   private val parcel = new RegistryName("parcel")
 
-  val feeder = csv("all-parcel-ids.csv.zip").unzip.batch.random
-
   val possibleCalls = List(
       Possibility(list, 30),
       Possibility(detail, 70)
@@ -27,7 +25,7 @@ object Parcel {
   }
 
   private def detail(responseTimes: MaximumResponseTimes) = {
-    feed(feeder)
+    feed(Feeders.parcelIds)
     .exec(
       http(session => "Vraag een perceel op")
         .get("/percelen/${capaKey}")

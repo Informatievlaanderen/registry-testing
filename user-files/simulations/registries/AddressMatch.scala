@@ -8,14 +8,12 @@ import infrastructure.RegistryRequestChecks._
 object AddressMatch {
   private val addressmatch = RegistryName("addressmatch")
 
-  val feeder = csv("addressmatch.csv.zip").unzip.batch.random
-
   val possibleCalls = List(
       Possibility(search, 100)
     )
 
   private def search(responseTimes: MaximumResponseTimes) = {
-    feed(feeder)
+    feed(Feeders.addressMatchParameters)
     .exec(
       http(session => "Voer een adres match uit")
         .get("/adresmatch")
