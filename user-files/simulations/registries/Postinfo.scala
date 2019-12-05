@@ -9,8 +9,9 @@ object Postinfo {
   private val postinfo = new RegistryName("postinfo")
   
   val possibleCalls = List(
-      Possibility(list, 30),
-      Possibility(detail, 70)
+      Possibility(list, 10),
+      Possibility(filteredList, 30),
+      Possibility(detail, 60)
     )
 
   private def list(responseTimes: MaximumResponseTimes) = {
@@ -20,6 +21,19 @@ object Postinfo {
         .check(
           status.isValidForList(postinfo),
           responseTimeInMillis.isValidForList(responseTimes, postinfo)
+        )
+    )
+  }
+
+  private def filteredList(responseTimes: MaximumResponseTimes) = {
+    feed(Feeders.addressMatchParameters) // todo: repalce with specific municipality name feeder
+    .exec(
+      http(session => "Vraag alle percelen op")
+        .get("/postinfo")
+        .queryParam("MunicipalityName", "${IN_Gemeentenaam}")
+        .check(
+          status.isValidForFilteredList(postinfo),
+          responseTimeInMillis.isValidForFilteredList(responseTimes, postinfo)
         )
     )
   }
