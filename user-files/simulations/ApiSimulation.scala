@@ -28,7 +28,7 @@ abstract class ApiRegistrySimulation(name: String, load: TrafficLoadConfiguratio
     load,
     recalculateWeights(
       RegisterySetup(Address.possibleCalls, 25),
-      // todo: RegisterySetup(Addressmatch.possibleCalls, 8),
+      RegisterySetup(AddressMatch.possibleCalls, 8),
       RegisterySetup(Building.possibleCalls, 15),
       RegisterySetup(BuildingUnit.possibleCalls, 20),
       RegisterySetup(CrabLegacy.possibleCalls, 2.5),
