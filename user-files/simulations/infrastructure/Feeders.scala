@@ -7,11 +7,10 @@ object Feeders {
   val addressMatchParameters = new SharedFeeder("addressmatch.csv.zip")
   val buildingIds = new SharedFeeder("all-building-ids.csv.zip")
   val buildingUnitIds = new SharedFeeder("all-buildingunit-ids.csv.zip")
-  val municipalityNisCodes = new SharedFeeder("all-municipality-niscodes.csv.zip")
   val parcelIds = new SharedFeeder("all-parcel-ids.csv.zip")
-  val postalCodes = new SharedFeeder("all-postal-codes.csv.zip")
-  val streenameIds = csv("all-streetname-ids.csv.zip").unzip.batch.random
-  
+  val streenameIds = new SharedFeeder("all-streetname-ids.csv.zip")
+  val postalInfo = new SharedFeeder("postal-info.csv.zip")
+
   object Crab {
     val housenumberIds = new SharedFeeder("all-crab-housenumber-ids.csv.zip")
     val subaddressIds = new SharedFeeder("all-crab-subaddress-ids.csv.zip")

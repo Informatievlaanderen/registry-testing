@@ -26,11 +26,11 @@ object Postinfo {
   }
 
   private def filteredList(responseTimes: MaximumResponseTimes) = {
-    feed(Feeders.addressMatchParameters) // todo: repalce with specific municipality name feeder
+    feed(Feeders.postalInfo)
     .exec(
       http(session => "Vraag alle percelen op")
         .get("/postinfo")
-        .queryParam("MunicipalityName", "${IN_Gemeentenaam}")
+        .queryParam("MunicipalityName", "${MunicipalityName}")
         .check(
           status.isValidForFilteredList(postinfo),
           responseTimeInMillis.isValidForFilteredList(responseTimes, postinfo)
@@ -39,15 +39,15 @@ object Postinfo {
   }
 
   private def detail(responseTimes: MaximumResponseTimes) = {
-    feed(Feeders.postalCodes)
+    feed(Feeders.postalInfo)
     .exec(
       http(session => "Vraag een perceel op")
-        .get("/postinfo/${postalCode}")
+        .get("/postinfo/${PostalCode}")
         .check(
           status.isValidForDetail(postinfo),
           responseTimeInMillis.isValidForDetail(responseTimes, postinfo)
         )
-        .checkWhenStatus(200)(jsonPath("$..identificator.objectId").is("${postalCode}"))
+        .checkWhenStatus(200)(jsonPath("$..identificator.objectId").is("${PostalCode}"))
     )
   }
 }

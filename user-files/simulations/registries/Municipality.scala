@@ -25,15 +25,15 @@ object Municipality {
   }
     
   private def detail(responseTimes: MaximumResponseTimes) = {
-    feed(Feeders.municipalityNisCodes)
+    feed(Feeders.postalInfo)
     .exec(
       http(session => "Vraag een gemeente op")
-        .get("/gemeenten/${nisCode}")
+        .get("/gemeenten/${NisCode}")
         .check(
           status.isValidForDetail(municipality),
           responseTimeInMillis.isValidForDetail(responseTimes, municipality)
         )
-        .checkWhenStatus(200)(jsonPath("$..identificator.objectId").is("${nisCode}"))
+        .checkWhenStatus(200)(jsonPath("$..identificator.objectId").is("${NisCode}"))
     )
   }
 }

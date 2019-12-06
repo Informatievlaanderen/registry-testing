@@ -66,6 +66,6 @@ object CrabLegacy {
 
   private class CrabName(listName: String) extends RegistryName("crab") {
     override val list = s"$name/$listName"
-    override val filteredList = s"$name/filtered$listName"
+    override val filteredList = s"$name/${listName}_filtered"
   }
 }
