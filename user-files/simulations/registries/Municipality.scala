@@ -28,12 +28,12 @@ object Municipality {
     feed(Feeders.postalInfo)
     .exec(
       http(session => "Vraag een gemeente op")
-        .get("/gemeenten/${NisCode}")
+        .get("/gemeenten/${nisCode}")
         .check(
           status.isValidForDetail(municipality),
           responseTimeInMillis.isValidForDetail(responseTimes, municipality)
         )
-        .checkWhenStatus(200)(jsonPath("$..identificator.objectId").is("${NisCode}"))
+        .checkWhenStatus(200)(jsonPath("$..identificator.objectId").is("${nisCode}"))
     )
   }
 }

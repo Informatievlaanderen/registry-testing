@@ -28,7 +28,7 @@ object BuildingUnit {
   private def filteredList(responseTimes: MaximumResponseTimes) = {
     feed(Feeders.addressIds)
     .exec(
-      http(session => "Vraag alle gebouweenheiden op voor adres-id")
+      http(session => "Vraag alle gebouweenheiden op voor adres")
         .get("/gebouweenheden")
         .queryp
         .queryParam("adresobjectid", "${addressId}")

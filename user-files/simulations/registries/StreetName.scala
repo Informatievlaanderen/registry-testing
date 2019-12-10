@@ -30,7 +30,7 @@ object StreetName {
     .exec(
       http(session => "Vraag alle straatnamen op voor een gemeente")
         .get("/straatnamen")
-        .queryParam("Gemeentenaam", "${MunicipalityName}")
+        .queryParam("Gemeentenaam", "${municipalityName}")
         .check(
           status.isValidForFilteredList(postinfo),
           responseTimeInMillis.isValidForFilteredList(responseTimes, postinfo)

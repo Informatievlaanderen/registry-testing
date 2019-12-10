@@ -32,7 +32,7 @@ object CrabLegacy {
     .exec(
       http(session => "Vraag alle subadres addressen op voor een id")
         .get("/crabhuisnummers")
-        .queryParam("CrabHouseNumberId", "${HouseNumberId}")
+        .queryParam("CrabHouseNumberId", "${houseNumberId}")
         .check(
           status.isValidForFilteredList(crabHouseNumber),
           responseTimeInMillis.isValidForFilteredList(responseTimes, crabHouseNumber)
@@ -56,7 +56,7 @@ object CrabLegacy {
     .exec(
       http(session => "Vraag alle subadres addressen op voor een id")
         .get("/crabsubadressen")
-        .queryParam("CrabSubaddressId", "${SubaddressId}")
+        .queryParam("CrabSubaddressId", "${subaddressId}")
         .check(
           status.isValidForFilteredList(crabSubaddress),
           responseTimeInMillis.isValidForFilteredList(responseTimes, crabSubaddress)

@@ -30,7 +30,7 @@ object Postinfo {
     .exec(
       http(session => "Vraag alle percelen op voor een gemeente")
         .get("/postinfo")
-        .queryParam("Gemeentenaam", "${MunicipalityName}")
+        .queryParam("Gemeentenaam", "${municipalityName}")
         .check(
           status.isValidForFilteredList(postinfo),
           responseTimeInMillis.isValidForFilteredList(responseTimes, postinfo)
@@ -42,12 +42,12 @@ object Postinfo {
     feed(Feeders.postalInfo)
     .exec(
       http(session => "Vraag een perceel op")
-        .get("/postinfo/${PostalCode}")
+        .get("/postinfo/${postalCode}")
         .check(
           status.isValidForDetail(postinfo),
           responseTimeInMillis.isValidForDetail(responseTimes, postinfo)
         )
-        .checkWhenStatus(200)(jsonPath("$..identificator.objectId").is("${PostalCode}"))
+        .checkWhenStatus(200)(jsonPath("$..identificator.objectId").is("${postalCode}"))
     )
   }
 }
