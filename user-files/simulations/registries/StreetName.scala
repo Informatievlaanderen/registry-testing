@@ -9,7 +9,8 @@ object StreetName {
   private val streetName = new RegistryName("streetname")
   
   val possibleCalls = List(
-      Possibility(list, 30),
+      Possibility(list, 10),
+      Possibility(filteredList, 20),
       Possibility(detail, 70)
     )
 
@@ -20,6 +21,19 @@ object StreetName {
         .check(
           status.isValidForList(streetName),
           responseTimeInMillis.isValidForList(responseTimes, streetName)
+        )
+    )
+  }
+
+  private def filteredList(responseTimes: MaximumResponseTimes) = {
+    feed(Feeders.postalInfo)
+    .exec(
+      http(session => "Vraag alle straatnamen op voor een gemeente")
+        .get("/straatnamen")
+        .queryParam("Gemeentenaam", "${MunicipalityName}")
+        .check(
+          status.isValidForFilteredList(postinfo),
+          responseTimeInMillis.isValidForFilteredList(responseTimes, postinfo)
         )
     )
   }
