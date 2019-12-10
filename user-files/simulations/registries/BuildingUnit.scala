@@ -30,7 +30,6 @@ object BuildingUnit {
     .exec(
       http(session => "Vraag alle gebouweenheiden op voor adres")
         .get("/gebouweenheden")
-        .queryp
         .queryParam("adresobjectid", "${addressId}")
         .check(
           status.isValidForList(buildingUnit),

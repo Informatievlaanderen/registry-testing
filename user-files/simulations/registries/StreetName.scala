@@ -32,8 +32,8 @@ object StreetName {
         .get("/straatnamen")
         .queryParam("Gemeentenaam", "${municipalityName}")
         .check(
-          status.isValidForFilteredList(postinfo),
-          responseTimeInMillis.isValidForFilteredList(responseTimes, postinfo)
+          status.isValidForFilteredList(streetName),
+          responseTimeInMillis.isValidForFilteredList(responseTimes, streetName)
         )
     )
   }
