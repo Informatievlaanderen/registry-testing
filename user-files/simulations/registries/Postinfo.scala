@@ -28,9 +28,9 @@ object Postinfo {
   private def filteredList(responseTimes: MaximumResponseTimes) = {
     feed(Feeders.postalInfo)
     .exec(
-      http(session => "Vraag alle percelen op")
+      http(session => "Vraag alle percelen op voor een gemeente")
         .get("/postinfo")
-        .queryParam("MunicipalityName", "${MunicipalityName}")
+        .queryParam("Gemeentenaam", "${MunicipalityName}")
         .check(
           status.isValidForFilteredList(postinfo),
           responseTimeInMillis.isValidForFilteredList(responseTimes, postinfo)

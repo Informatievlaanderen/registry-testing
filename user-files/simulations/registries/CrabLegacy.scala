@@ -30,7 +30,7 @@ object CrabLegacy {
   private def filteredListHouseNumbers(responseTimes: MaximumResponseTimes) = {
     feed(Feeders.Crab.housenumberIds)
     .exec(
-      http(session => "Vraag alle subadres addressen op")
+      http(session => "Vraag alle subadres addressen op voor een id")
         .get("/crabhuisnummers")
         .queryParam("CrabHouseNumberId", "${HouseNumberId}")
         .check(
@@ -54,7 +54,7 @@ object CrabLegacy {
   private def filteredListSubaddresses(responseTimes: MaximumResponseTimes) = {
     feed(Feeders.Crab.subaddressIds)
     .exec(
-      http(session => "Vraag alle subadres addressen op")
+      http(session => "Vraag alle subadres addressen op voor een id")
         .get("/crabsubadressen")
         .queryParam("CrabSubaddressId", "${SubaddressId}")
         .check(
