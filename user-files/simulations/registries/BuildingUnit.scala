@@ -9,7 +9,8 @@ object BuildingUnit {
   private val buildingUnit = RegistryName("buildingUnit")
     
   val possibleCalls = List(
-      Possibility(list, 30),
+      Possibility(list, 10),
+      Possibility(filteredList, 20),
       Possibility(detail, 70)
     )
 
@@ -24,6 +25,20 @@ object BuildingUnit {
     )
   }
 
+  private def filteredList(responseTimes: MaximumResponseTimes) = {
+    feed(Feeders.addressIds)
+    .exec(
+      http(session => "Vraag alle gebouweenheiden op voor adres-id")
+        .get("/gebouweenheden")
+        .queryp
+        .queryParam("adresobjectid", "${addressId}")
+        .check(
+          status.isValidForList(buildingUnit),
+          responseTimeInMillis.isValidForList(responseTimes, buildingUnit)
+        )
+    )
+  }
+  
   private def detail(responseTimes: MaximumResponseTimes) = {
     feed(Feeders.buildingUnitIds)
     .exec(
