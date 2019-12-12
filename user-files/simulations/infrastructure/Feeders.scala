@@ -22,7 +22,7 @@ class SharedFeeder(zip: String) {
 
     def getFeeder = {
       if (feeder == null) 
-        feeder = csv(zip).unzip.batch.random
+        feeder = csv(System.getProperty("feeder_prefix") + zip).unzip.batch.random
       
       feeder    
     }
