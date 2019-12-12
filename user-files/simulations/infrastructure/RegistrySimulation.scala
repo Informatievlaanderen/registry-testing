@@ -20,7 +20,7 @@ abstract class RegistrySimulation extends Simulation {
     .acceptHeader("application/json, text/javascript, */*; q=0.5")
     .acceptLanguageHeader("en-US,en;q=0.9,nl;q=0.8")
     .acceptEncodingHeader("gzip, deflate, br")
-    .userAgentHeader("Basisregisters Vlaanderen Gatling - Municipality Simulation")
+    .userAgentHeader("Basisregisters Vlaanderen Gatling - Load Test Simulation")
     .doNotTrackHeader("1")
     .disableCaching
 
