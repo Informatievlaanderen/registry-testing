@@ -13,7 +13,6 @@ abstract class RegistrySimulation extends Simulation {
   private val loadTestApiKey = System.getProperty("api_key")
 
   val httpProtocol = http
-  // val httpProtocol = httpConfigFlood
     .baseUrl(System.getProperty("base_url"))
     .header("x-api-key", loadTestApiKey)
     .warmUp(System.getProperty("warmup_url"))
