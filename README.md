@@ -4,11 +4,28 @@
 
 > Run various tests against the registries.
 
+### Load tests
+
+Execute `run.bat/run.sh` (only use .sh on linux or in wsl, shells like git-bash give errors) and pass in required variables.
+Tests are exceuted in a docker container, the report can be found at `results/{scenarioname-timestamp}/index.html`
+
+```bash
+API_KEY=REPLACEME BASE_URL=https://api.basisregisters.vlaanderen/v1 WARMUP_URL=https://www.vlaanderen.be/nl ./run.sh
+API_KEY=REPLACEME BASE_URL=https://api.basisregisters.dev-vlaanderen.be/v1 WARMUP_URL=https://api.basisregisters.dev-vlaanderen.be/v1/versions ./run.sh
+```
+
+| Criteria | Standard | High | Peak |  
+|----------|----------|------|------|
+| requests/second | 10| 20| 380
+| Maximum response time* | 250ms | 500ms | 30000ms
+
+\* Response times are currently not split up in different calls. Lists and searches will take longer than (cached) detail requests, so this should be adjusted accordingly.
+
 ## Prerequisites
 
 ### Git LFS
 
-```console
+```bash
 $ curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
 $ sudo apt-get install git-lfs
 ```
