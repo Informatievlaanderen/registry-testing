@@ -10,13 +10,13 @@ import scala.math.{min, max}
 
 abstract class RegistrySimulation extends Simulation {
   
-  private val loadTestApiKey = "REPLACEME"
+  private val loadTestApiKey = System.getProperty("api_key")
 
   val httpProtocol = http
   // val httpProtocol = httpConfigFlood
-    .baseUrl("https://api.basisregisters.vlaanderen/v1")
+    .baseUrl(System.getProperty("base_url"))
     .header("x-api-key", loadTestApiKey)
-    .warmUp("https://www.vlaanderen.be/nl")
+    .warmUp(System.getProperty("warmup_url"))
     .acceptHeader("application/json, text/javascript, */*; q=0.5")
     .acceptLanguageHeader("en-US,en;q=0.9,nl;q=0.8")
     .acceptEncodingHeader("gzip, deflate, br")
