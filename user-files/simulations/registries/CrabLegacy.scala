@@ -18,7 +18,7 @@ object CrabLegacy {
     
   private def listHouseNumbers(responseTimes: MaximumResponseTimes) = {
     exec(
-      http(session => "Vraag alle huisnummer addressen op")
+      http(session => "Vraag alle huisnummer adressen op")
         .get("/crabhuisnummers")
         .check(
           status.isValidForList(crabHouseNumber),
@@ -30,7 +30,7 @@ object CrabLegacy {
   private def filteredListHouseNumbers(responseTimes: MaximumResponseTimes) = {
     feed(Feeders.Crab.housenumberIds)
     .exec(
-      http(session => "Vraag alle subadres addressen op voor een id")
+      http(session => "Vraag alle huisnummer adressen op voor een id")
         .get("/crabhuisnummers")
         .queryParam("CrabHouseNumberId", "${houseNumberId}")
         .check(
@@ -42,7 +42,7 @@ object CrabLegacy {
 
   private def listSubaddresses(responseTimes: MaximumResponseTimes) = {
     exec(
-      http(session => "Vraag alle subadres addressen op")
+      http(session => "Vraag alle subadres adressen op")
         .get("/crabsubadressen")
         .check(
           status.isValidForList(crabSubaddress),
@@ -54,7 +54,7 @@ object CrabLegacy {
   private def filteredListSubaddresses(responseTimes: MaximumResponseTimes) = {
     feed(Feeders.Crab.subaddressIds)
     .exec(
-      http(session => "Vraag alle subadres addressen op voor een id")
+      http(session => "Vraag alle subadres adressen op voor een id")
         .get("/crabsubadressen")
         .queryParam("CrabSubaddressId", "${subaddressId}")
         .check(
