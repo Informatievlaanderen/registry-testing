@@ -16,7 +16,7 @@ object Postinfo {
 
   private def list(responseTimes: MaximumResponseTimes) = {
     exec(
-      http(session => "Vraag alle percelen op")
+      http(session => "Vraag alle postinfo op")
         .get("/postinfo")
         .check(
           status.isValidForList(postinfo),
@@ -28,7 +28,7 @@ object Postinfo {
   private def filteredList(responseTimes: MaximumResponseTimes) = {
     feed(Feeders.postalInfo)
     .exec(
-      http(session => "Vraag alle percelen op voor een gemeente")
+      http(session => "Vraag postinfo op voor een gemeente")
         .get("/postinfo")
         .queryParam("Gemeentenaam", "${municipalityName}")
         .check(
@@ -41,7 +41,7 @@ object Postinfo {
   private def detail(responseTimes: MaximumResponseTimes) = {
     feed(Feeders.postalInfo)
     .exec(
-      http(session => "Vraag een perceel op")
+      http(session => "Vraag postinfo op voor een postcode")
         .get("/postinfo/${postalCode}")
         .check(
           status.isValidForDetail(postinfo),
