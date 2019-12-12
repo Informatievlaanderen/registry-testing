@@ -21,7 +21,7 @@ object RegistryRequestChecks {
     
       builder.check(
         conditionalChecks.map(
-          condtionalCheck => checkIf(hasStatusCode _)(condtionalCheck)
+          conditionalCheck => checkIf(hasStatusCode _)(conditionalCheck)
       ): _*)
     }
   }
