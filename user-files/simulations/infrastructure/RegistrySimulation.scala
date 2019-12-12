@@ -10,7 +10,7 @@ import scala.math.{min, max}
 
 abstract class RegistrySimulation extends Simulation {
   
-  private val loadTestApiKey = "cafebabe-1337-1337-1337-cdcdcdcdcdcd"
+  private val loadTestApiKey = "REPLACEME"
 
   val httpProtocol = http
   // val httpProtocol = httpConfigFlood
