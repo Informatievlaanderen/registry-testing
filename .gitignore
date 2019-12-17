@@ -1,4 +1,5 @@
 results/
 target/
+.fake/
 
-flood/user-files.zip
+flood-packages/
