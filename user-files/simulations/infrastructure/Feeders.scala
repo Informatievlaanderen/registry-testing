@@ -20,9 +20,15 @@ object Feeders {
 class SharedFeeder(zip: String) {
     private var feeder: io.gatling.core.feeder.FeederBuilder = null 
 
-    def getFeeder = {
-      if (feeder == null) 
-        feeder = csv(System.getProperty("feeder_prefix") + zip).unzip.batch.random
+    def getFeeder = {      
+      if (feeder == null) {
+        val resource = Option(System.getProperty("feeder_prefix"))
+          .filterNot(_.isEmpty)
+          .map(prefix => (prefix.trim + "/" + zip).replace("//", "/"))
+          .getOrElse(zip)
+
+        feeder = csv(resource).unzip.batch.random
+      } 
       
       feeder    
     }
