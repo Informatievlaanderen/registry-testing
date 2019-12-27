@@ -1,5 +1,6 @@
 results/
 target/
 .fake/
+.ionide/
 
 flood-packages/
