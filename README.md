@@ -53,7 +53,7 @@ To get an idea how this behaves, have a look at this visual representation of a 
 ![Open model capacity load test](https://raw.githubusercontent.com/Informatievlaanderen/registry-testing/master/gatling.png)
 
 ##### ¹ Response times are currently not split up in different calls. Lists and searches will take longer than (cached) detail requests, so this should be adjusted accordingly.
-[¹]:#-note-two
+[¹]:#-response-times-are-currently-not-split-up-in-different-calls-lists-and-searches-will-take-longer-than-cached-detail-requests-so-this-should-be-adjusted-accordingly
 
 ## Prerequisites
 
