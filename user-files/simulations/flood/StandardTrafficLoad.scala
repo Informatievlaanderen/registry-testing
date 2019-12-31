@@ -18,8 +18,9 @@ class StandardTrafficLoad extends Simulation {
       .inject(
         incrementUsersPerSec(load.incrementUsersPerCycleBy)
           .times(load.numberOfCycles)
-          .eachLevelLasting(10 seconds)
-          .startingFrom(load.incrementUsersPerCycleBy)
+          .eachLevelLasting(load.cycleDuration)
+          .separatedByRampsLasting(load.rampDuration)
+          .startingFrom(load.initialUsers)
       ).protocols(Protocols.default)
   )
 }
