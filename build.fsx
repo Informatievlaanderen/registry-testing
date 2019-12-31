@@ -20,7 +20,7 @@ let createFloodPackage (file: System.IO.FileInfo) =
     let scenarioDirectory = destinationDirectory @@ scenario
     Shell.mkdir scenarioDirectory
     Shell.copy scenarioDirectory [ userFilesZip; file.ToString() ]
-    let floodSimulationFile = scenarioDirectory @@ "FloodSimumlation.scala"
+    let floodSimulationFile = scenarioDirectory @@ "FloodSimulation.scala"
     Shell.rename floodSimulationFile (scenarioDirectory @@ file.Name)
     Shell.regexReplaceInFileWithEncoding "class.+(extends.+Simulation)" "class FloodSimulation $1" utf8 floodSimulationFile
 
