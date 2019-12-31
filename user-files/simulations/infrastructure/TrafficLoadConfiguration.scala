@@ -30,10 +30,10 @@ object Load {
   // We were already under high load, and it only peaked more (we got into the news!)
   // Going all the way up from 30rps to 380rps
   val Peak = new TrafficLoadConfiguration(
-    30,          // initialNumberOfUsers
-    380,         // totalNumberOfUsers
-    1 minutes,   // ramp up time
-    5 minutes,   // cycle duration
+    30,         // initialNumberOfUsers
+    380,        // totalNumberOfUsers
+    1 minutes,  // ramp up time
+    5 minutes,  // cycle duration
     MaximumResponseTimes(
       30000 milliseconds,
       30000 milliseconds,
