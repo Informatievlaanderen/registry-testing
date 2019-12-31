@@ -42,11 +42,11 @@ Inject a succession of `numberOfCycles` levels each one during `cycleDuration` a
 
 Currently the following `MixedSimulation` are defined:
 
-| Name     | `numberOfCycles` | `cycleDuration` | `incrementUsersPerCycleBy` | `initialUsers` | `rampDuration` |
-| -------- | ---------------- | --------------- | -------------------------- | -------------- | -------------- |
-| Standard |  5               |  10 min         |  2                         |  5             |  30 sec        |
-| High     |  5               |  10 min         |  4                         |  10            |  30 sec        |
-| Peak     |  19              |   5 min         |  20                        |  30            |   1 min        |
+| Name     | `numberOfCycles` | `cycleDuration` | `incrementUsersPerCycleBy` | `initialUsers` | `rampDuration` | Total Duration |
+| -------- | ---------------- | --------------- | -------------------------- | -------------- | -------------- | -------------- |
+| Standard |  5               |  10 min         |  2                         |  5             |  30 sec        | ~ 1 hour       |
+| High     |  5               |  10 min         |  4                         |  10            |  30 sec        | ~ 1 hour       |
+| Peak     |  19              |   5 min         |  20                        |  30            |   1 min        | ~ 2 hours      |
 
 ## Prerequisites
 
