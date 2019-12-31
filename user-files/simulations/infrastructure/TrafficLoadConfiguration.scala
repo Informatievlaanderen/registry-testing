@@ -49,7 +49,7 @@ class TrafficLoadConfiguration(
 
   val totalNumberOfUsers = atLeast1(numberOfUsers)
   val incrementUsersPerCycleBy = atLeast1(atMost20(totalNumberOfUsers / 5))
-  val numberOfCycles = atLeast1(totalNumberOfUsers / incrementUsersPerCycleBy) 
+  val numberOfCycles = atLeast1((totalNumberOfUsers / incrementUsersPerCycleBy) - 1)
 
   val cycleDuration = atLeast1Minute(desiredCycleDuration)
   val rampDuration = atLeast10Seconds(desiredRampDuration)

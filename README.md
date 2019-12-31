@@ -37,9 +37,9 @@ Currently the following `MixedSimulation`s are defined:
 
 | Name     | `numberOfCycles` | `cycleDuration` | `incrementUsersPerCycleBy` | `initialUsers` | `rampDuration` | Total Duration |
 | -------- | ---------------- | --------------- | -------------------------- | -------------- | -------------- | -------------- |
-| Standard |  5               |  10 min         |  2                         |  5             |  30 sec        | ~ 1 hour       |
-| High     |  5               |  10 min         |  4                         |  10            |  30 sec        | ~ 1 hour       |
-| Peak     |  19              |   5 min         |  20                        |  30            |   1 min        | ~ 2 hours      |
+| Standard |  4               |  10 min         |  2                         |  5             |  30 sec        | ~ 1 hour       |
+| High     |  4               |  10 min         |  4                         |  10            |  30 sec        | ~ 1 hour       |
+| Peak     |  18              |   5 min         |  20                        |  30            |   1 min        | ~ 2 hours      |
 
 The validations for these `MixedSimulation`s are as follows:
 
