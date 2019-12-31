@@ -46,6 +46,10 @@ Target.create "Create_flood_upload_packages" (fun _ ->
 
 Target.create "Flood" ignore
 
-"Clean_flood_directory" ==> "Zip_user_files" ==> "Create_flood_upload_packages" ==> "Clean_up_temporary_files" ==> "Flood"
+"Clean_flood_directory" 
+    ==> "Zip_user_files" 
+    ==> "Create_flood_upload_packages" 
+    ==> "Clean_up_temporary_files" 
+    ==> "Flood"
 
 Target.runOrDefault "Flood"
