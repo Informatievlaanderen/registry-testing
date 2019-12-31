@@ -48,6 +48,10 @@ The validations for these `MixedSimulation`s are as follows:
 | requests/second          | 10 rps   | 20 rps | 380 rps  |
 | Maximum response time[¹] | 250 ms   | 500 ms | 30000 ms |
 
+To get an idea how this behaves, have a look at this visual representation of a capacity load test:
+
+![Open model capacity load test](https://raw.githubusercontent.com/informatievlaanderen/registry-testing/master/gatling.png)
+
 ##### ¹ Response times are currently not split up in different calls. Lists and searches will take longer than (cached) detail requests, so this should be adjusted accordingly.
 [¹]:#-note-two
 
