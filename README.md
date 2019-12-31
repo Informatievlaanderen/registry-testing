@@ -10,19 +10,12 @@
 
 Execute `run.bat/run.sh` (only use .sh on linux or in wsl, shells like git-bash give errors) and pass in required variables.
 
-Tests are exceuted in a docker container, the report can be found at `results/{scenarioname-timestamp}/index.html`
+Tests are executed in a docker container, the report can be found at `results/{scenarioname-timestamp}/index.html`
 
 ```bash
 API_KEY=REPLACEME BASE_URL=https://api.basisregisters.vlaanderen/v1 WARMUP_URL=https://www.vlaanderen.be/nl ./run.sh
 API_KEY=REPLACEME BASE_URL=https://api.basisregisters.dev-vlaanderen.be/v1 WARMUP_URL=https://api.basisregisters.dev-vlaanderen.be/v1/versions ./run.sh
 ```
-
-| Criteria | Standard | High | Peak |  
-|----------|----------|------|------|
-| requests/second | 10| 20| 380
-| Maximum response time* | 250ms | 500ms | 30000ms
-
-\* Response times are currently not split up in different calls. Lists and searches will take longer than (cached) detail requests, so this should be adjusted accordingly.
 
 ### Scenarios
 
@@ -40,13 +33,23 @@ incrementUsersPerSec(load.incrementUsersPerCycleBy)
 
 Inject a succession of `numberOfCycles` levels each one during `cycleDuration` and increasing the number of users per sec by `incrementUsersPerCycleBy` starting from `initialUsers` and separated by ramps lasting `rampDuration`.
 
-Currently the following `MixedSimulation` are defined:
+Currently the following `MixedSimulation`s are defined:
 
 | Name     | `numberOfCycles` | `cycleDuration` | `incrementUsersPerCycleBy` | `initialUsers` | `rampDuration` | Total Duration |
 | -------- | ---------------- | --------------- | -------------------------- | -------------- | -------------- | -------------- |
 | Standard |  5               |  10 min         |  2                         |  5             |  30 sec        | ~ 1 hour       |
 | High     |  5               |  10 min         |  4                         |  10            |  30 sec        | ~ 1 hour       |
 | Peak     |  19              |   5 min         |  20                        |  30            |   1 min        | ~ 2 hours      |
+
+The validations for these `MixedSimulation`s are as follows:
+
+| Criteria                 | Standard | High   | Peak     |  
+| ------------------------ | -------- | ------ | -------- |
+| requests/second          | 10 rps   | 20 rps | 380 rps  |
+| Maximum response time[¹] | 250 ms   | 500 ms | 30000 ms |
+
+##### ¹ Response times are currently not split up in different calls. Lists and searches will take longer than (cached) detail requests, so this should be adjusted accordingly.
+[¹]:#-note-two
 
 ## Prerequisites
 
