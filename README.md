@@ -4,9 +4,12 @@
 
 > Run various tests against the registries.
 
-### Load tests
+## Load tests
+
+### Execution
 
 Execute `run.bat/run.sh` (only use .sh on linux or in wsl, shells like git-bash give errors) and pass in required variables.
+
 Tests are exceuted in a docker container, the report can be found at `results/{scenarioname-timestamp}/index.html`
 
 ```bash
@@ -20,6 +23,30 @@ API_KEY=REPLACEME BASE_URL=https://api.basisregisters.dev-vlaanderen.be/v1 WARMU
 | Maximum response time* | 250ms | 500ms | 30000ms
 
 \* Response times are currently not split up in different calls. Lists and searches will take longer than (cached) detail requests, so this should be adjusted accordingly.
+
+### Scenarios
+
+#### MixedSimulation
+
+This is a typical _capacity load test_ to see when the application starts suffering.
+
+```scala
+incrementUsersPerSec(load.incrementUsersPerCycleBy)
+    .times(load.numberOfCycles)
+    .eachLevelLasting(load.cycleDuration)
+    .separatedByRampsLasting(load.rampDuration)
+    .startingFrom(load.initialUsers)
+```
+
+Inject a succession of `numberOfCycles` levels each one during `cycleDuration` and increasing the number of users per sec by `incrementUsersPerCycleBy` starting from `initialUsers` and separated by ramps lasting `rampDuration`.
+
+Currently the following `MixedSimulation` are defined:
+
+| Name     | `numberOfCycles` | `cycleDuration` | `incrementUsersPerCycleBy` | `initialUsers` | `rampDuration` |
+| -------- | ---------------- | --------------- | -------------------------- | -------------- | -------------- |
+| Standard |  5               |  10 min         |  2                         |  5             |  30 sec        |
+| High     |  5               |  10 min         |  4                         |  10            |  30 sec        |
+| Peak     |  19              |   5 min         |  20                        |  30            |   1 min        |
 
 ## Prerequisites
 
