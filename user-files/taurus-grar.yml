@@ -1,0 +1,16 @@
+modules:
+  gatling:
+    version: 3.2.1
+
+execution:
+- executor: gatling
+  scenario: grar
+
+scenarios:
+  grar:
+    script: MunicipalitySimulation.scala
+    simulation: StandardTrafficLoadForMunicipality
+    properties:
+      api_key: xxx
+      base_url: https://api.basisregisters.dev-vlaanderen.be/v1
+      warmup_url: https://api.basisregisters.dev-vlaanderen.be/v1/versions
