@@ -27,7 +27,11 @@ class SharedFeeder(zip: String) {
           .map(prefix => (prefix.trim + "/" + zip).replace("//", "/"))
           .getOrElse(zip)
 
-        feeder = csv(resource).unzip.batch.random
+        try {
+          feeder = csv(resource).unzip.batch.random
+        } catch {
+          feeder = csv(resource.replace(".zip", "")).batch.random
+        }
       } 
       
       feeder    
