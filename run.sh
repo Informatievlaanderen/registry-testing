@@ -21,7 +21,7 @@ fi
 
 DOCKER_IMAGE="denvazh/gatling:3.2.1"
 docker pull $DOCKER_IMAGE
-docker run -i --rm \
+docker run -it --rm \
 -v $GATLING_CONFIGURATION:/opt/gatling/conf \
 -v $GATLING_USERFILES:/opt/gatling/user-files \
 -v $GATLING_RESULTS:/opt/gatling/results \
