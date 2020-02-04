@@ -30,7 +30,8 @@ class SharedFeeder(zip: String) {
         try {
           feeder = csv(resource).unzip.batch.random
         } catch {
-          feeder = csv(resource.replace(".zip", "")).batch.random
+          case e : Throwable =>
+            feeder = csv(resource.replace(".zip", "")).batch.random
         }
       } 
       
