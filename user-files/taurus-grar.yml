@@ -15,7 +15,7 @@ execution:
 scenarios:
   Municipality-Standard:
     script: MunicipalitySimulation.scala
-    simulation: StandardTrafficLoadForMunicipality
+    simulation: registry.municipality.StandardTrafficLoadForMunicipality
     properties:
       api_key: xxx
       base_url: https://api.basisregisters.dev-vlaanderen.be/v1
