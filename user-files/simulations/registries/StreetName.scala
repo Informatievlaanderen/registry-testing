@@ -39,7 +39,7 @@ object StreetName {
   }
 
   private def detail(responseTimes: MaximumResponseTimes) = {
-    feed(Feeders.streenameIds)
+    feed(Feeders.streetnameIds)
     .exec(
       http(session => "Vraag een straatnaam op")
         .get("/straatnamen/${straatnaamId}")

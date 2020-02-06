@@ -8,7 +8,7 @@ object Feeders {
   val buildingIds = new SharedFeeder("all-building-ids.csv.zip")
   val buildingUnitIds = new SharedFeeder("all-buildingunit-ids.csv.zip")
   val parcelIds = new SharedFeeder("all-parcel-ids.csv.zip")
-  val streenameIds = new SharedFeeder("all-streetname-ids.csv.zip")
+  val streetnameIds = new SharedFeeder("all-streetname-ids.csv.zip")
   val postalInfo = new SharedFeeder("postal-info.csv.zip")
 
   object Crab {
