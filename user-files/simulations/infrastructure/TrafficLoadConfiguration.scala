@@ -35,9 +35,9 @@ object Load {
     1 minutes,  // ramp up time
     5 minutes,  // cycle duration
     MaximumResponseTimes(
-      30000 milliseconds,
-      30000 milliseconds,
-      30000 milliseconds))
+      28000 milliseconds,
+      28000 milliseconds,
+      28000 milliseconds))
 }
 
 class TrafficLoadConfiguration(
