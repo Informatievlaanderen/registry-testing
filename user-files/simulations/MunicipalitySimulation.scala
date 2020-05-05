@@ -16,3 +16,11 @@ class PeakTrafficLoadForMunicipality extends RegistrySimulation {
   setUp("Municipality - peak load", Load.Peak, Municipality.possibleCalls)
 }
 
+class AnonymousValidTrafficLoadForMunicipality extends RegistrySimulation {
+  setUp("Municipality - anonymous valid load", Load.AnonymousValid, Municipality.possibleCalls)
+}
+
+class AnonymousInvalidTrafficLoadForMunicipality extends RegistrySimulation {
+  setUp("Municipality - anonymous invalid load", Load.AnonymousInvalid, Municipality.possibleCalls)
+}
+
