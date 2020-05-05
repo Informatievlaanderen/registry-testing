@@ -38,6 +38,28 @@ object Load {
       28000 milliseconds,
       28000 milliseconds,
       28000 milliseconds))
+  
+  // Below 50rps
+  val AnonymousValid = new TrafficLoadConfiguration(
+    30,         // initialNumberOfUsers
+    30,         // totalNumberOfUsers
+    10 seconds, // ramp up time
+    20 minutes, // cycle duration
+    MaximumResponseTimes(
+      250 milliseconds,
+      250 milliseconds,
+      250 milliseconds))
+
+  // Above 50rps
+  val AnonymousInvalid = new TrafficLoadConfiguration(
+    90,         // initialNumberOfUsers
+    90,         // totalNumberOfUsers
+    10 seconds, // ramp up time
+    20 minutes, // cycle duration
+    MaximumResponseTimes(
+      250 milliseconds,
+      250 milliseconds,
+      250 milliseconds))
 }
 
 class TrafficLoadConfiguration(
