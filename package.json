@@ -1,0 +1,15 @@
+{
+  "name": "registry-testing",
+  "version": "1.0.0",
+  "description": "> Run various tests against the registries.",
+  "author": "Basisregisters Vlaanderen",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Informatievlaanderen/registry-testing.git"
+  },
+  "license": "EUPL-1.2",
+  "bugs": {
+    "url": "https://github.com/Informatievlaanderen/registry-testing/issues"
+  },
+  "homepage": "https://github.com/Informatievlaanderen/registry-testing#readme"
+}
