@@ -1,0 +1,5 @@
+{
+    "executor": "constant-vus",
+    "vus": "10",
+    "duration": "5s"
+}

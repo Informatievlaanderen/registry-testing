@@ -1,4 +1,10 @@
+import http from 'k6/http';
 import { API_KEY } from './config.js';
+
+export function executeHttp(url) {
+  const headers = getHeaders();
+  return http.get(url, { headers });
+}
 
 export function getHeaders() {
   const headers = {};
@@ -15,3 +21,5 @@ export function getRandomInt(min, max) {
 export function getRandomLimit() {
   return getRandomInt(1, 500);
 }
+
+export default { executeHttp, getRandomInt, getRandomLimit };

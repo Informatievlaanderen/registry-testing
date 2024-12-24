@@ -1,18 +1,17 @@
-import http from 'k6/http';
-import { check } from 'k6';
-import { BASE_URL } from '../config.js';
-import { getRandomLimit, getHeaders } from '../common.js';
+import { check, sleep } from 'k6';
+import { BASE_URL, SLEEP_DURATION } from '../config.js';
+import common from '../common.js';
 
 export default function () {
   let statusData = ['inGebruik', 'voorgesteld', 'gehistoreerd'];
 
   const randomIndex = Math.floor(Math.random() * statusData.length);
   const status = statusData[randomIndex];
-  const url = `${BASE_URL}/v2/gemeenten?status=${status}&limit=${getRandomLimit()}`;
+  const url = `${BASE_URL}/v2/gemeenten?status=${status}&limit=${common.getRandomLimit()}`;
 
-  const headers = getHeaders();
-  const res = http.get(url, { headers });
+  const res = common.executeHttp(url);
   check(res, {
     'status is 200': (r) => r.status === 200,
   });
+  sleep(SLEEP_DURATION);
 }

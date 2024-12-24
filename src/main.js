@@ -1,10 +1,8 @@
+import { group } from 'k6';
 import municipalityTest from './municipality/main.js';
 
-export const options = {
-  vus: 10,
-  duration: '3s',
-};
-
 export default function () {
-  municipalityTest();
+  group('municipality', () => {
+    municipalityTest();
+  });
 }
