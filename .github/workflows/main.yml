@@ -1,9 +1,20 @@
 name: Run K6 test
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: 'Environment to run the test'
+        required: true
+        default: staging
+        options:
+        - staging
+        - production
       # use datadog https://github.com/DataDog/test-visibility-github-action
+
 jobs:
   run-test:
+    environment: staging
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -12,7 +23,13 @@ jobs:
       - name: Setup K6
         uses: grafana/setup-k6-action@v1
 
+      - name: Print BASE_URL
+        run: echo "BASE_URL is ${{ vars.BASE_URL }}"
+
       - name: Run local k6 test
         uses: grafana/run-k6-action@v1
         with:
           path: src/main.js
+        env:
+          BASE_URL: ${{ env.BASE_URL }}
+          API_KEY: ${{ secrets.API_KEY }}
