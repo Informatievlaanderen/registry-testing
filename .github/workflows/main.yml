@@ -1,7 +1,6 @@
+name: Run K6 test
 on:
-  push:
-    branches:
-      - '**'
+  workflow_dispatch:
       # use datadog https://github.com/DataDog/test-visibility-github-action
 jobs:
   run-test:
@@ -15,6 +14,5 @@ jobs:
 
       - name: Run local k6 test
         uses: grafana/run-k6-action@v1
-
         with:
           path: src/main.js
