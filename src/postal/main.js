@@ -12,4 +12,6 @@ export default function () {
   } else {
     group('postalDetail', () => { postalDetail(); });
   }
+
+  //TODO: add status list test?
 }
