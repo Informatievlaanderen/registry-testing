@@ -1,11 +1,13 @@
 import { group } from 'k6';
-import { BASE_URL } from './config.js';
 import municipalityTest from './municipality/main.js';
+import postalTest from './postal/main.js';
 
 export default function () {
-  console.log(`BASE_URL: ${BASE_URL}`);
-
   group('municipality', () => {
     municipalityTest();
+  });
+
+  group('postal', () => {
+    postalTest();
   });
 }
