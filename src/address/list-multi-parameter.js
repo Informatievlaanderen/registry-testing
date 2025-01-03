@@ -4,8 +4,8 @@ import { BASE_URL, SLEEP_DURATION } from '../config.js';
 import common from '../common.js';
 import papaparse from 'https://jslib.k6.io/papaparse/5.1.1/index.js';
 
-const csvData = new SharedArray('addressmatch-data', function () {
-  return papaparse.parse(open('../data/addressmatch.csv'), { header: true }).data;
+const csvData = new SharedArray('addresses-multi-parameter-data', function () {
+  return papaparse.parse(open('../data/addresses-multi-parameters.csv'), { header: true }).data;
 });
 
 export default function () {
@@ -18,12 +18,12 @@ export default function () {
   const municipalityName = encodeURIComponent(selectedRow.municipalityName);
   const homonym = encodeURIComponent(selectedRow.homonymAddition);
 
-  const url = `${BASE_URL}/v2/adresmatch?gemeentenaam=${municipalityName}`
-                + `&straatnaam=${streetName}`
-                + `&huisnummer=${houseNumber}`
-                + `&busnummer=${boxNumber}`
-                + `&postcode=${postalCode}`
-                + `&homoniemtoevoeging=${homonym}`;
+  const url = `${BASE_URL}/v2/adressen?gemeentenaam=${municipalityName}`
+              + `&straatnaam=${streetName}`
+              + `&huisnummer=${houseNumber}`
+              + `&busnummer=${boxNumber}`
+              + `&postcode=${postalCode}`
+              + `&homoniemtoevoeging=${homonym}`;
 
   const res = common.executeHttp(url);
   check(res, {

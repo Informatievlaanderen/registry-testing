@@ -12,7 +12,7 @@ export default function () {
   // Randomly select one row
   const randomIndex = Math.floor(Math.random() * csvData.length);
   const selectedRow = csvData[randomIndex];
-  const id = selectedRow.parcelId; // Assuming the CSV has a column named 'id'
+  const id = selectedRow.parcelId;
   const url = `${BASE_URL}/v2/percelen/${id}`;
 
   const res = executeHttp(url);

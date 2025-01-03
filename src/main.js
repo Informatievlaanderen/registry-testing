@@ -6,6 +6,7 @@ import buildingTest from './building/main.js';
 import buildingUnitTest from './buildingunit/main.js';
 import parcelTest from './parcel/main.js';
 import addressMatchTest from './addressmatch/main.js';
+import addressTest from './address/main.js';
 
 export default function () {
   const randomValue = Math.random();
@@ -24,6 +25,6 @@ export default function () {
   } else if(randomValue < 0.75) {
     group('addressMatchTest', () => { addressMatchTest(); });
   } else {
-    //address
+    group('addressTest', () => { addressTest(); });
   }
 }

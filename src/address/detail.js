@@ -4,16 +4,16 @@ import { BASE_URL, SLEEP_DURATION } from '../config.js';
 import { executeHttp } from '../common.js';
 import papaparse from 'https://jslib.k6.io/papaparse/5.1.1/index.js';
 
-const csvData = new SharedArray('niscodes-data', function () {
-  return papaparse.parse(open('../data/niscodes.csv'), { header: true }).data;
+const csvData = new SharedArray('addresses-data', function () {
+  return papaparse.parse(open('../data/addresses.csv'), { header: true }).data;
 });
 
 export default function () {
   // Randomly select one row
   const randomIndex = Math.floor(Math.random() * csvData.length);
   const selectedRow = csvData[randomIndex];
-  const id = selectedRow.niscode;
-  const url = `${BASE_URL}/v2/gemeenten/${id}`;
+  const id = selectedRow.addressId;
+  const url = `${BASE_URL}/v2/adressen/${id}`;
 
   const res = executeHttp(url);
   check(res, {
