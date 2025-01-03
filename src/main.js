@@ -4,6 +4,7 @@ import postalTest from './postal/main.js';
 import streetnameTest from './streetname/main.js';
 import buildingTest from './building/main.js';
 import buildingUnitTest from './buildingunit/main.js';
+import parcelTest from './parcel/main.js';
 
 export default function () {
   const randomValue = Math.random();
@@ -15,6 +16,8 @@ export default function () {
     group('streetnameTest', () => { streetnameTest(); });
   } else if(randomValue < 0.50) {
     group('buildingTest', () => { buildingTest(); });
+  } else if(randomValue < 0.60) {
+    group('parcelTest', () => { parcelTest(); });
   } else {
     group('buildingUnitTest', () => { buildingUnitTest(); });
   }
