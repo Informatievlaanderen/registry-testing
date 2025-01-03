@@ -15,7 +15,7 @@ export default function () {
   const id = selectedRow.streetNameId;
   const url = `${BASE_URL}/v2/straatnamen/${id}`;
 
-  const res = executeHttp(url);
+  const res = executeHttp(url, 'straatnaam-detail');
   check(res, {
     'status is 200': (r) => r.status === 200,
   });

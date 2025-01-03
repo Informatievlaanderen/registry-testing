@@ -7,7 +7,7 @@ export default function () {
   const offset = common.getRandomInt(1, 1000);
   const url = `${BASE_URL}/v2/straatnamen?offset=${offset}&limit=${limit}`;
 
-  const res = common.executeHttp(url);
+  const res = common.executeHttp(url, 'straatnaam-lijst');
   check(res, {
     'status is 200': (r) => r.status === 200,
   });

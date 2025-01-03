@@ -15,7 +15,7 @@ export default function () {
   const encodedName = encodeURIComponent(name);
   const url = `${BASE_URL}/v2/straatnamen?straatnaam=${encodedName}&limit=${common.getRandomLimit()}`;
 
-  const res = common.executeHttp(url);
+  const res = common.executeHttp(url, 'straatnaam-lijst-straatnaam');
   check(res, {
     'status is 200': (r) => r.status === 200,
   });

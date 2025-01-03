@@ -15,7 +15,7 @@ export default function () {
   const id = selectedRow.addressId;
   const url = `${BASE_URL}/v2/adressen/${id}`;
 
-  const res = executeHttp(url);
+  const res = executeHttp(url, 'adres-detail');
   check(res, {
     'status is 200': (r) => r.status === 200,
   });

@@ -14,7 +14,7 @@ export default function () {
   const addressId = selectedRow.addressId;
   const url = `${BASE_URL}/v2/gebouweenheden?adresObjectId=${addressId}&limit=${common.getRandomLimit()}`;
 
-  const res = common.executeHttp(url);
+  const res = common.executeHttp(url, 'gebouweenheid-lijst-adres-id');
   check(res, {
     'status is 200': (r) => r.status === 200,
   });

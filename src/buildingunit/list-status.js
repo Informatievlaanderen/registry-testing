@@ -9,7 +9,7 @@ export default function () {
   const status = statusData[randomIndex];
   const url = `${BASE_URL}/v2/gebouweenheden?status=${status}&limit=${common.getRandomLimit()}`;
 
-  const res = common.executeHttp(url);
+  const res = common.executeHttp(url, 'gebouweenheid-lijst-status');
   check(res, {
     'status is 200': (r) => r.status === 200,
   });

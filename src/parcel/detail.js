@@ -15,7 +15,7 @@ export default function () {
   const id = selectedRow.parcelId;
   const url = `${BASE_URL}/v2/percelen/${id}`;
 
-  const res = executeHttp(url);
+  const res = executeHttp(url, 'perceel-detail');
   check(res, {
     'status is 200': (r) => r.status === 200,
   });

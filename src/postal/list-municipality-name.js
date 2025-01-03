@@ -14,7 +14,7 @@ export default function () {
   const name = selectedRow.municipalityName;
   const url = `${BASE_URL}/v2/postinfo?gemeentenaam=${name}&limit=${common.getRandomLimit()}`;
 
-  const res = common.executeHttp(url);
+  const res = common.executeHttp(url, 'postinfo-lijst-gemeentenaam');
   check(res, {
     'status is 200': (r) => r.status === 200,
   });

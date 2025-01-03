@@ -15,7 +15,7 @@ export default function () {
   const id = selectedRow.postalCode;
   const url = `${BASE_URL}/v2/postinfo/${id}`;
 
-  const res = executeHttp(url);
+  const res = executeHttp(url, 'postinfo-detail');
   check(res, {
     'status is 200': (r) => r.status === 200,
   });

@@ -15,7 +15,7 @@ export default function () {
   const id = selectedRow.niscode;
   const url = `${BASE_URL}/v2/gemeenten/${id}`;
 
-  const res = executeHttp(url);
+  const res = executeHttp(url, 'gemeente-detail');
   check(res, {
     'status is 200': (r) => r.status === 200,
   });

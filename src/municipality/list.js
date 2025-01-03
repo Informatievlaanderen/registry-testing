@@ -7,7 +7,7 @@ export default function () {
   const offset = common.getRandomInt(1, 400);
   const url = `${BASE_URL}/v2/gemeenten?offset=${offset}&limit=${limit}`;
 
-  const res = common.executeHttp(url);
+  const res = common.executeHttp(url, 'gemeente-lijst');
   check(res, {
     'status is 200': (r) => r.status === 200,
   });

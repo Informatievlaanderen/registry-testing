@@ -25,7 +25,7 @@ export default function () {
                 + `&postcode=${postalCode}`
                 + `&homoniemtoevoeging=${homonym}`;
 
-  const res = common.executeHttp(url);
+  const res = common.executeHttp(url, 'adresmatch');
   check(res, {
     'status is 200': (r) => r.status === 200,
   });

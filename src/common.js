@@ -1,9 +1,12 @@
 import http from 'k6/http';
 import { API_KEY } from './config.js';
 
-export function executeHttp(url) {
+export function executeHttp(url, name) {
   const headers = getHeaders();
-  return http.get(url, { headers });
+  return http.get(url, {
+    headers,
+    tags: { name: name }
+  });
 }
 
 export function getHeaders() {

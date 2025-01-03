@@ -15,7 +15,7 @@ export default function () {
   const id = selectedRow.buildingId;
   const url = `${BASE_URL}/v2/gebouwen/${id}`;
 
-  const res = executeHttp(url);
+  const res = executeHttp(url, 'gebouw-detail');
   check(res, {
     'status is 200 or 410': (r) => r.status === 200 || r.status === 410,
   });

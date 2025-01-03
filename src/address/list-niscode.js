@@ -14,7 +14,7 @@ export default function () {
   const niscode = selectedRow.niscode;
   const url = `${BASE_URL}/v2/adressen?niscode=${niscode}&limit=${common.getRandomLimit()}`;
 
-  const res = common.executeHttp(url);
+  const res = common.executeHttp(url, 'adres-lijst-niscode');
   check(res, {
     'status is 200': (r) => r.status === 200,
   });
