@@ -1,5 +1,6 @@
 import { group } from 'k6';
 import addressList from './list.js';
+import addressSearch from './search.js';
 import addressListStatus from './list-status.js';
 import addressListNiscode from './list-niscode.js';
 import addressListMulti from './list-multi-parameter.js';
@@ -17,5 +18,9 @@ export default function () {
     group('addressListMulti', () => { addressListMulti(); });
   } else {
    group('addressDetail', () => { addressDetail(); });
+  }
+
+  if(randomValue <= 0.5) {
+    group('addressSearch', () => { addressSearch(); });
   }
 }
