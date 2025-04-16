@@ -1,6 +1,6 @@
 {
     "executor": "constant-vus",
-    "vus": "500",
+    "vus": "50",
     "duration": "180s",
     "custom": "value"
 }
