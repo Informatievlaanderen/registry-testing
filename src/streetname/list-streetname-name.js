@@ -13,7 +13,7 @@ export default function () {
   const selectedRow = csvData[randomIndex];
   const name = selectedRow.streetNameName;
   const encodedName = encodeURIComponent(name);
-  const url = `${BASE_URL}/v2/straatnamen?straatnaam=${encodedName}&limit=${common.getRandomLimit()}`;
+  const url = `${BASE_URL}/v2/straatnamen?straatnaam=${encodedName}&limit=${common.common.getRandomInt(300,500)}`;
 
   const res = common.executeHttp(url, 'straatnaam-lijst-straatnaam');
   check(res, {
