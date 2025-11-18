@@ -11,7 +11,8 @@ const csvData = new SharedArray('postal-municipality-names', function () {
 export default function () {
   const randomIndex = Math.floor(Math.random() * csvData.length);
   const selectedRow = csvData[randomIndex];
-  const name = selectedRow.municipalityName;
+  //const name = selectedRow.municipalityName;
+  const name = encodeURIComponent(selectedRow.municipalityName);
   const url = `${BASE_URL}/v2/postinfo?gemeentenaam=${name}&limit=${common.getRandomLimit()}`;
 
   const res = common.executeHttp(url, 'postinfo-lijst-gemeentenaam');
