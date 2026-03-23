@@ -14,6 +14,7 @@ export default function () {
   const selectedRow = csvData[randomIndex];
   const id = selectedRow.addressId;
   const url = `${BASE_URL}/v2/adressen/${id}`;
+  //const url = `https://iv.apic.dev-vlaanderen.be/gebouwen-adressen-registers-test/${id}`;//apigee
 
   const res = executeHttp(url, 'adres-detail');
   check(res, {
