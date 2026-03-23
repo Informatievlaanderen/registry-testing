@@ -45,3 +45,6 @@ Thumbs.db
 
 crabimport-request-*.json
 structurizr-*.json
+
+config.local.json
+src/config.local.json

@@ -29,6 +29,24 @@ See `./src/config.js` for variables.
 
 `BASE_URL=http://xxx k6 run ./src/main.js --config ./src/configs/smoke.json`
 
+### Local config file (for secrets)
+Create `./src/config.local.json` to keep secrets out of git. This file is ignored by `.gitignore`.
+
+Example:
+
+```json
+{
+	"API_KEY": "your-api-key",
+	"BASE_URL": "https://api.basisregisters.staging-vlaanderen.be",
+	"SLEEP_DURATION": 0.3
+}
+```
+
+Priority order in `src/config.js` is:
+1. Environment variables (`__ENV`)
+2. `src/config.local.json`
+3. Hardcoded defaults
+
 ## Load tests
 
 TODO
