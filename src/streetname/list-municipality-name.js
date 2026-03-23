@@ -11,7 +11,7 @@ const csvData = new SharedArray('streetnames-municipality-names', function () {
 export default function () {
   const randomIndex = Math.floor(Math.random() * csvData.length);
   const selectedRow = csvData[randomIndex];
-  const name = selectedRow.municipalityName;
+  const name = encodeURIComponent(selectedRow.municipalityName);
   const url = `${BASE_URL}/v2/straatnamen?gemeentenaam=${name}&limit=${common.getRandomLimit()}`;
 
   const res = common.executeHttp(url, 'straatnaam-lijst-gemeentenaam');
