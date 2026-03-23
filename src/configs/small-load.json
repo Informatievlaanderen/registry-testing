@@ -9,7 +9,7 @@
     ],
     "cloud": {
       "distribution": {
-        "DE": { "loadZone": "amazon:us:ashburn", "percent": 100 }
+        "DE": { "loadZone": "amazon:de:frankfurt", "percent": 100 }
       }
     }
 }
