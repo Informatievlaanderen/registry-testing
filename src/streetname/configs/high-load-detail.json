@@ -18,19 +18,19 @@
         },
         {
             "duration": "30s",
-            "target": 1000
+            "target": 850
         },
         {
             "duration": "60s",
-            "target": 1400
-        },
-        {
-            "duration": "30s",
-            "target": 1400
+            "target": 1000
         },
         {
             "duration": "30s",
             "target": 1000
+        },
+        {
+            "duration": "30s",
+            "target": 850
         },
         {
             "duration": "20s",
